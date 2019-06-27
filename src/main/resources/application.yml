@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: jackblog
+  thymeleaf:
+    mode: HTML
+    cache: true
+
+mybatis:
+  type-aliases-package: cn.luckyvv.blog.entity
+  mapper-locations: classpath:resource/mapper/*.xml
