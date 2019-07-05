@@ -14,3 +14,10 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
+
+logging:
+  file: runtime.log
+
+security:
+  jwtSecret: 123123qwe
+  jwtExpirationInMs: 3600000
