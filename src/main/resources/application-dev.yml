@@ -14,6 +14,15 @@ spring:
         prepStmtCacheSize: 250
         prepStmtCacheSqlLimit: 2048
         useServerPrepStmts: true
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    lettuce.pool.max-active: 8
+    lettuce.pool.max-wait: -1
+    lettuce.pool.max-idle: 8
+    lettuce.pool.min-idle: 0
 
 logging:
   file: runtime.log
@@ -21,3 +30,5 @@ logging:
 security:
   jwtSecret: 123123qwe
   jwtExpirationInMs: 3600000
+
+

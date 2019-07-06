@@ -2,6 +2,7 @@ package cn.luckyvv.blog.web.rest;
 
 import cn.luckyvv.blog.security.JwtTokenProvider;
 import cn.luckyvv.blog.web.rest.vm.UserVM;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -24,6 +25,9 @@ public class JwtController {
 
     @Inject
     private JwtTokenProvider jwtTokenProvider;
+
+    @Inject
+    private RedisTemplate<String,String> redisTemplate;
 
     @PostMapping("/auth")
     public ResponseEntity<?> login(@Valid @RequestBody UserVM userVM){

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.xml.bind.ValidationException;
+import java.time.temporal.WeekFields;
 import java.util.Objects;
 
 /**
@@ -24,6 +25,14 @@ import java.util.Objects;
 public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
+    @ExceptionHandler(WebException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public WebException badRequest(WebException e){
+        logger.info("Bad Request Info: {},{}",e.getMessage(),e.getData());
+        return e;
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody

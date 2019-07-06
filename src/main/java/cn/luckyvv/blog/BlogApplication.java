@@ -7,6 +7,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+
+/**
+ * Blog
+ * @author JackJun
+ */
 @SpringBootApplication
 @EnableSwagger2
 @MapperScan("cn.luckyvv.blog.mapper")
