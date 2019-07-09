@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+    <property name="doubleType" value="float8" dbms="postgresql, h2"/>
+    <property name="doubleType" value="double" dbms="mysql, oracle, mssql"/>
+    <property name="textType" value="varchar" dbms="postgresql, h2"/>
+    <property name="textType" value="text" dbms="mysql, oracle, mssql"/>
+
+    <changeSet id="00000000001" author="jack">
+        <createTable tableName="file" remarks="文件上传">
+            <column type="int" autoIncrement="${autoIncrement}" name="id">
+                <constraints primaryKey="true" />
+            </column>
+            <column type="varchar(200)" name="title"/>
+            <column type="varchar(200)" name="url"/>
+            <column type="int" name="status"/>
+        </createTable>
+
+        <createTable tableName="login" remarks="登录信息">
+            <column type="int" autoIncrement="${autoIncrement}" name="id">
+                <constraints primaryKey="true" />
+            </column>
+            <column type="varchar(20)" name="user">
+                <constraints nullable="false"/>
+            </column>
+            <column type="varchar(100)" name="password">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="note" remarks="笔记">
+            <column type="int" autoIncrement="${autoIncrement}" name="id">
+                <constraints primaryKey="true" />
+            </column>
+            <column type="varchar(50)" name="title">
+                <constraints nullable="false"/>
+            </column>
+            <column type="datetime" name="publish_time" remarks="发布时间">
+                <constraints nullable="false"/>
+            </column>
+            <column type="datetime" name="last_update_time" remarks="最后更新时间">
+                <constraints nullable="false"/>
+            </column>
+            <column type="${textType}" name="content" remarks="文章内容">
+                <constraints nullable="false"/>
+            </column>
+            <column type="${textType}" name="display_content" remarks="显示的摘要内容">
+                <constraints nullable="false"/>
+            </column>
+            <column type="int" name="display_type" remarks="显示类型">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="note_click" remarks="文章点击记录">
+            <column type="int" autoIncrement="${autoIncrement}" name="id">
+                <constraints primaryKey="true" />
+            </column>
+            <column type="int" name="note_id" remarks="文章ID">
+                <constraints nullable="true"/>
+            </column>
+            <column type="int" name="clickNum" remarks="点击次数">
+                <constraints nullable="false"/>
+            </column>
+            <column type="date" name="date" remarks="日期">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="note_has_tag" remarks="文章标签">
+            <column type="int" autoIncrement="${autoIncrement}" name="id">
+                <constraints primaryKey="true" />
+            </column>
+            <column type="int" name="tag_id" remarks="文章ID">
+                <constraints nullable="false"/>
+            </column>
+            <column type="int" name="note_id" remarks="标签ID">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="pv" remarks="日pv">
+            <column type="int" autoIncrement="${autoIncrement}" name="id">
+                <constraints primaryKey="true" />
+            </column>
+            <column type="date" name="date" remarks="日期">
+                <constraints nullable="false"/>
+            </column>
+            <column type="int" name="num" remarks="pv量">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="tags" remarks="标签">
+            <column type="int" autoIncrement="${autoIncrement}" name="id">
+                <constraints primaryKey="true" />
+            </column>
+            <column type="varchar(20)" name="title" remarks="标题">
+                <constraints nullable="false"/>
+            </column>
+            <column type="datetime" name="datetime" remarks="发布时间">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

@@ -12,8 +12,12 @@ import javax.inject.Inject;
 @SpringBootTest
 public class BlogApplicationTests {
 
+    @Inject
+    PasswordEncoder passwordEncoder;
+
     @Test
     public void contextLoads() {
+        System.out.println(passwordEncoder.encode("123123"));
     }
 
 }

@@ -4,6 +4,8 @@ spring:
   thymeleaf:
     mode: HTML
     cache: true
+  profiles:
+    active: dev
 
 mybatis:
   type-aliases-package: cn.luckyvv.blog.entity
