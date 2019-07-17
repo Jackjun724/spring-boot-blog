@@ -3,7 +3,7 @@ package cn.luckyvv.blog.web.exception;
 /**
  * @author JackJun
  * 2019/7/2 9:06
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 public class WebException extends RuntimeException {
     private static final long serialVersionUID = 1L ;

@@ -1,6 +1,5 @@
 package cn.luckyvv.blog.security;
 
-import com.sun.security.auth.UserPrincipal;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,7 @@ import java.util.Date;
 /**
  * @author JackJun
  * 2019/7/1 17:47
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 @Component
 public class JwtTokenProvider {

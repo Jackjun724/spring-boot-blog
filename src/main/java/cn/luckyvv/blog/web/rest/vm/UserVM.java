@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 /**
  * @author JackJun
  * 2019/7/1 19:46
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 public class UserVM {
 

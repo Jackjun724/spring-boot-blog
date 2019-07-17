@@ -3,7 +3,7 @@ package cn.luckyvv.blog.web.response;
 /**
  * @author JackJun
  * 2019/7/4 20:11
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 public class PageResponse<T> extends RestResponse<Page<T>>{
 

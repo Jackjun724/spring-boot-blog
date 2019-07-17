@@ -18,7 +18,7 @@ import java.io.IOException;
 /**
  * @author JackJun
  * 2019/6/27 18:39
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Inject

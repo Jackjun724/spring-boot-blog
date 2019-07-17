@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import javax.xml.bind.ValidationException;
-import java.time.temporal.WeekFields;
 import java.util.Objects;
 
 /**
  * @author JackJun
  * 2019/7/3 11:52
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -38,7 +36,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public RestResponse formValidateFailed(MethodArgumentNotValidException e){
-        logger.error(e.getBindingResult().getFieldError().getDefaultMessage());
+        logger.error(Objects.requireNonNull(e.getBindingResult().getFieldError()).getDefaultMessage());
         return RestResponse.getResp(e.getBindingResult().getFieldError().getDefaultMessage());
     }
 

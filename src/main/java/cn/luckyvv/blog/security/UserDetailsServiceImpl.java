@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * @author JackJun
  * 2019/6/27 16:44
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {

@@ -22,7 +22,7 @@ import javax.inject.Inject;
 /**
  * @author JackJun
  * 2019/7/1 10:11
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 @Configuration
 @EnableWebSecurity

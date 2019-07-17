@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * @author JackJun
  * 2019/7/5 16:37
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 @Component
 public class CORSSecurityFilter implements Filter {

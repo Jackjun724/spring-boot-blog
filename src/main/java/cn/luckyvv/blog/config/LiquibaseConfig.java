@@ -7,12 +7,11 @@ import org.springframework.core.env.Environment;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
-import java.util.Arrays;
 
 /**
  * @author JackJun
  * 2019/7/8 20:05
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 @Configuration
 public class LiquibaseConfig {

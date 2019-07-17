@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 /**
  * @author JackJun
  * 2019/7/4 20:01
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RestResponse<T> {

@@ -13,7 +13,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 /**
  * @author JackJun
  * 2019/6/27 15:00
- * Life is not just about survival, but VV and distance.
+ * Life is not just about survival.
  */
 @Configuration
 public class SwaggerConfig {
