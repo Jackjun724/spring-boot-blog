@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.luckyvv.blog.mapper.NoteMapper">
-  <resultMap id="BaseResultMap" type="cn.luckyvv.blog.entity.Note">
+<mapper namespace="com.jacknoob.blog.mapper.NoteMapper">
+    <resultMap id="BaseResultMap" type="com.jacknoob.blog.entity.Note">
     <constructor>
       <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -11,7 +11,7 @@
       <arg column="display_type" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="cn.luckyvv.blog.entity.Note">
+    <resultMap id="ResultMapWithBLOBs" type="com.jacknoob.blog.entity.Note">
     <constructor>
       <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -25,7 +25,7 @@
   <sql id="Blob_Column_List">
     display_content
   </sql>
-  <insert id="insert" parameterType="cn.luckyvv.blog.entity.Note">
+    <insert id="insert" parameterType="com.jacknoob.blog.entity.Note">
     insert into note (id, title, publish_time, 
       last_update_time, content, display_type, 
       display_content)
@@ -33,7 +33,7 @@
       #{lastUpdateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{displayType,jdbcType=INTEGER}, 
       #{displayContent,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="cn.luckyvv.blog.entity.Note">
+    <insert id="insertSelective" parameterType="com.jacknoob.blog.entity.Note">
     insert into note
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

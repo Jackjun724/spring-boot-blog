@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.luckyvv.blog.mapper.FileMapper">
-  <resultMap id="BaseResultMap" type="cn.luckyvv.blog.entity.File">
+<mapper namespace="com.jacknoob.blog.mapper.FileMapper">
+  <resultMap id="BaseResultMap" type="com.jacknoob.blog.entity.File">
     <constructor>
       <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -9,13 +9,13 @@
       <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
-  <insert id="insert" parameterType="cn.luckyvv.blog.entity.File">
+  <insert id="insert" parameterType="com.jacknoob.blog.entity.File">
     insert into file (id, title, url, 
       status)
     values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{status,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="cn.luckyvv.blog.entity.File">
+  <insert id="insertSelective" parameterType="com.jacknoob.blog.entity.File">
     insert into file
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

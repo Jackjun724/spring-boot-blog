@@ -8,5 +8,5 @@ spring:
     active: dev
 
 mybatis:
-  type-aliases-package: cn.luckyvv.blog.entity
+  type-aliases-package: com.jacknoob.blog.entity
   mapper-locations: classpath:resource/mapper/*.xml
