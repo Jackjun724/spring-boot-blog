@@ -1,6 +1,7 @@
 package com.jacknoob.blog.web.rest;
 
 import com.jacknoob.blog.security.JwtTokenProvider;
+import com.jacknoob.blog.web.exception.WebException;
 import com.jacknoob.blog.web.rest.vm.UserVM;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -43,6 +44,6 @@ public class JwtResource {
     @GetMapping("/userinfo")
     @ApiOperation("获取当前Token用户信息")
     public ResponseEntity<?> getUserInfo(@RequestParam String token) {
-        return new ResponseEntity<>("接口暂未开放", HttpStatus.OK);
+        throw new WebException("接口未开放", HttpStatus.BAD_REQUEST);
     }
 }
