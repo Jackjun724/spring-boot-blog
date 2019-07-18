@@ -5,16 +5,16 @@ import java.util.Date;
 public class NoteClick {
     private Integer id;
 
-    private Integer noteid;
+    private Integer noteId;
 
-    private Integer clicknum;
+    private Integer clickNum;
 
     private Date date;
 
-    public NoteClick(Integer id, Integer noteid, Integer clicknum, Date date) {
+    public NoteClick(Integer id, Integer noteId, Integer clickNum, Date date) {
         this.id = id;
-        this.noteid = noteid;
-        this.clicknum = clicknum;
+        this.noteId = noteId;
+        this.clickNum = clickNum;
         this.date = date;
     }
 
@@ -30,20 +30,20 @@ public class NoteClick {
         this.id = id;
     }
 
-    public Integer getNoteid() {
-        return noteid;
+    public Integer getNoteId() {
+        return noteId;
     }
 
-    public void setNoteid(Integer noteid) {
-        this.noteid = noteid;
+    public void setNoteId(Integer noteId) {
+        this.noteId = noteId;
     }
 
-    public Integer getClicknum() {
-        return clicknum;
+    public Integer getClickNum() {
+        return clickNum;
     }
 
-    public void setClicknum(Integer clicknum) {
-        this.clicknum = clicknum;
+    public void setClickNum(Integer clickNum) {
+        this.clickNum = clickNum;
     }
 
     public Date getDate() {

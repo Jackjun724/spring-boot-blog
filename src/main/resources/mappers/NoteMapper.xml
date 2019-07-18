@@ -24,8 +24,8 @@
     </resultMap>
     <resultMap id="NoteInformation" type="com.jacknoob.blog.entity.Note" extends="BaseResultMap">
         <collection property="tags" javaType="java.util.ArrayList" ofType="com.jacknoob.blog.entity.Tag">
-            <id property="id" column="tagId"/>
-            <result property="title" column="tagTitle"/>
+            <id property="id" column="tag_id"/>
+            <result property="title" column="tag_title"/>
         </collection>
     </resultMap>
     <sql id="Blob_Column_List">

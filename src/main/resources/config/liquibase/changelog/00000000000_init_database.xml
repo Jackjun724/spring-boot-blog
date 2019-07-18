@@ -112,4 +112,8 @@
         </createTable>
     </changeSet>
 
+    <changeSet author="jack" id="20190718144760">
+        <renameColumn tableName="note_click" oldColumnName="clickNum" newColumnName="click_num"/>
+    </changeSet>
+
 </databaseChangeLog>
