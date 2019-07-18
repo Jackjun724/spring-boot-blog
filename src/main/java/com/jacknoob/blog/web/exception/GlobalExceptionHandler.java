@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Objects;
 
 /**
@@ -26,10 +28,9 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(WebException.class)
     @ResponseBody
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public WebException badRequest(WebException e){
+    public ResponseEntity<?> badRequest(WebException e) {
         logger.info("Bad Request Info: {},{}",e.getMessage(),e.getData());
-        return e;
+        return new ResponseEntity<>(RestResponse.getResp(e.getMessage(), e.getData()), e.getStatus());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -49,7 +50,10 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<?> globalException(RuntimeException e){
-        logger.error(e.getMessage());
+        ByteArrayOutputStream exceptionStream = new ByteArrayOutputStream();
+        e.printStackTrace(new PrintStream(exceptionStream));
+        String exceptionMsg = exceptionStream.toString();
+        logger.error(exceptionMsg);
         return new ResponseEntity<>(RestResponse.getResp(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

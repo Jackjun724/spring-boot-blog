@@ -1,6 +1,7 @@
 package com.jacknoob.blog.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Note {
     private Integer id;
@@ -16,6 +17,8 @@ public class Note {
     private Integer displayType;
 
     private String displayContent;
+
+    private List<Tag> tags;
 
     public Note(Integer id, String title, Date publishTime, Date lastUpdateTime, String content, Integer displayType) {
         this.id = id;
@@ -94,5 +97,13 @@ public class Note {
 
     public void setDisplayContent(String displayContent) {
         this.displayContent = displayContent == null ? null : displayContent.trim();
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }

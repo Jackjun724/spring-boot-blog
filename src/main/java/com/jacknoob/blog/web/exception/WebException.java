@@ -1,5 +1,7 @@
 package com.jacknoob.blog.web.exception;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * @author JackJun
  * 2019/7/2 9:06
@@ -9,17 +11,17 @@ public class WebException extends RuntimeException {
     private static final long serialVersionUID = 1L ;
 
     private String message;
-    private int code;
+    private HttpStatus status;
     private Object data;
 
-    public WebException(String message,int code){
+    public WebException(String message, HttpStatus status) {
         this.message = message;
-        this.code = code;
+        this.status = status;
     }
 
-    public WebException(String message, int code, Object data) {
+    public WebException(String message, HttpStatus status, Object data) {
         this.message = message;
-        this.code = code;
+        this.status = status;
         this.data = data;
     }
 
@@ -28,8 +30,8 @@ public class WebException extends RuntimeException {
         return message;
     }
 
-    public int getCode() {
-        return code;
+    public HttpStatus getStatus() {
+        return status;
     }
 
     public Object getData() {

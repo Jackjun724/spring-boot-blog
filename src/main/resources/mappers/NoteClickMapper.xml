@@ -2,48 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jacknoob.blog.mapper.NoteClickMapper">
     <resultMap id="BaseResultMap" type="com.jacknoob.blog.entity.NoteClick">
-    <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="noteId" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="clickNum" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="date" javaType="java.util.Date" jdbcType="DATE" />
-    </constructor>
-  </resultMap>
+        <constructor>
+            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="noteId" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="click_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="date" javaType="java.util.Date" jdbcType="DATE"/>
+        </constructor>
+    </resultMap>
     <insert id="insert" parameterType="com.jacknoob.blog.entity.NoteClick">
-    insert into note_click (id, noteId, clickNum, 
-      date)
-    values (#{id,jdbcType=INTEGER}, #{noteid,jdbcType=INTEGER}, #{clicknum,jdbcType=INTEGER}, 
-      #{date,jdbcType=DATE})
-  </insert>
+        insert into note_click (id, noteId, click_num, date)
+        values (#{id,jdbcType=INTEGER}, #{noteid,jdbcType=INTEGER}, #{clicknum,jdbcType=INTEGER}, #{date,jdbcType=DATE})
+    </insert>
     <insert id="insertSelective" parameterType="com.jacknoob.blog.entity.NoteClick">
-    insert into note_click
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="noteid != null">
-        noteId,
-      </if>
-      <if test="clicknum != null">
-        clickNum,
-      </if>
-      <if test="date != null">
-        date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="noteid != null">
-        #{noteid,jdbcType=INTEGER},
-      </if>
-      <if test="clicknum != null">
-        #{clicknum,jdbcType=INTEGER},
-      </if>
-      <if test="date != null">
-        #{date,jdbcType=DATE},
-      </if>
-    </trim>
-  </insert>
+        insert into note_click
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="noteid != null">
+                noteId,
+            </if>
+            <if test="clicknum != null">
+                click_num,
+            </if>
+            <if test="date != null">
+                date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="noteid != null">
+                #{noteid,jdbcType=INTEGER},
+            </if>
+            <if test="clicknum != null">
+                #{clicknum,jdbcType=INTEGER},
+            </if>
+            <if test="date != null">
+                #{date,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <insert id="insertClick">
+        insert into noteclick (noteId, click_num, date)
+        values (#{id}, 1, CURRENT_DATE)
+    </insert>
+    <select id="clickNum" resultType="java.lang.Integer">
+        select sum(click_num)
+        from noteclick
+        where noteId = #{id}
+    </select>
 </mapper>

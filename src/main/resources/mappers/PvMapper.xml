@@ -2,39 +2,53 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jacknoob.blog.mapper.PvMapper">
     <resultMap id="BaseResultMap" type="com.jacknoob.blog.entity.Pv">
-    <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="date" javaType="java.util.Date" jdbcType="DATE" />
-      <arg column="num" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    </constructor>
-  </resultMap>
+        <constructor>
+            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="date" javaType="java.util.Date" jdbcType="DATE"/>
+            <arg column="num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        </constructor>
+    </resultMap>
     <insert id="insert" parameterType="com.jacknoob.blog.entity.Pv">
-    insert into pv (id, date, num)
-    values (#{id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{num,jdbcType=INTEGER})
-  </insert>
+        insert into pv (id, date, num)
+        values (#{id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{num,jdbcType=INTEGER})
+    </insert>
     <insert id="insertSelective" parameterType="com.jacknoob.blog.entity.Pv">
-    insert into pv
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="date != null">
-        date,
-      </if>
-      <if test="num != null">
-        num,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="date != null">
-        #{date,jdbcType=DATE},
-      </if>
-      <if test="num != null">
-        #{num,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
+        insert into pv
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="date != null">
+                date,
+            </if>
+            <if test="num != null">
+                num,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="date != null">
+                #{date,jdbcType=DATE},
+            </if>
+            <if test="num != null">
+                #{num,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectNow" resultType="java.util.Map">
+        SELECT num
+        FROM `pv`
+        where date = CURRENT_DATE
+    </select>
+    <insert id="insertNow">
+        insert into pv (date, num)
+        values (CURRENT_DATE, 1)
+    </insert>
+    <update id="addOneNow">
+        update pv
+        set num = num + 1
+        where date = current_date
+    </update>
 </mapper>

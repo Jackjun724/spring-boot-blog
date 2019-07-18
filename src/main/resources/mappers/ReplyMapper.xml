@@ -2,78 +2,81 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jacknoob.blog.mapper.ReplyMapper">
     <resultMap id="BaseResultMap" type="com.jacknoob.blog.entity.Reply">
-    <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="note_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="reply" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="reply_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="ip" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="date" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-    </constructor>
-  </resultMap>
+        <constructor>
+            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="note_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="reply" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="reply_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="ip" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="date" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </constructor>
+    </resultMap>
     <insert id="insert" parameterType="com.jacknoob.blog.entity.Reply">
-    insert into reply (id, note_id, reply, 
-      name, reply_id, ip, 
-      status, date)
-    values (#{id,jdbcType=INTEGER}, #{noteId,jdbcType=INTEGER}, #{reply,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{replyId,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP})
-  </insert>
+        insert into reply (id, note_id, reply, name, reply_id, ip, status, date)
+        values (#{id,jdbcType=INTEGER},
+                #{noteId,jdbcType=INTEGER},
+                #{reply,jdbcType=VARCHAR},
+                #{name,jdbcType=VARCHAR},
+                #{replyId,jdbcType=INTEGER},
+                #{ip,jdbcType=VARCHAR},
+                #{status,jdbcType=INTEGER},
+                #{date,jdbcType=TIMESTAMP})
+    </insert>
     <insert id="insertSelective" parameterType="com.jacknoob.blog.entity.Reply">
-    insert into reply
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="noteId != null">
-        note_id,
-      </if>
-      <if test="reply != null">
-        reply,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="replyId != null">
-        reply_id,
-      </if>
-      <if test="ip != null">
-        ip,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="date != null">
-        date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="noteId != null">
-        #{noteId,jdbcType=INTEGER},
-      </if>
-      <if test="reply != null">
-        #{reply,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="replyId != null">
-        #{replyId,jdbcType=INTEGER},
-      </if>
-      <if test="ip != null">
-        #{ip,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="date != null">
-        #{date,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
+        insert into reply
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="noteId != null">
+                note_id,
+            </if>
+            <if test="reply != null">
+                reply,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="replyId != null">
+                reply_id,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="date != null">
+                date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="noteId != null">
+                #{noteId,jdbcType=INTEGER},
+            </if>
+            <if test="reply != null">
+                #{reply,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="replyId != null">
+                #{replyId,jdbcType=INTEGER},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="date != null">
+                #{date,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
 </mapper>

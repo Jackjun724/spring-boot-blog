@@ -6,4 +6,8 @@ public interface NoteClickMapper {
     int insert(NoteClick record);
 
     int insertSelective(NoteClick record);
+
+    void insertClick(Integer id);
+
+    int clickNum(Integer id);
 }

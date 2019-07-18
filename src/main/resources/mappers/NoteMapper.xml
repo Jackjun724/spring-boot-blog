@@ -2,84 +2,148 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jacknoob.blog.mapper.NoteMapper">
     <resultMap id="BaseResultMap" type="com.jacknoob.blog.entity.Note">
-    <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="publish_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="last_update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="display_type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    </constructor>
-  </resultMap>
+        <constructor>
+            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="publish_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="last_update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="display_type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        </constructor>
+    </resultMap>
     <resultMap id="ResultMapWithBLOBs" type="com.jacknoob.blog.entity.Note">
-    <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="publish_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="last_update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="display_type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="display_content" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Blob_Column_List">
-    display_content
-  </sql>
-    <insert id="insert" parameterType="com.jacknoob.blog.entity.Note">
-    insert into note (id, title, publish_time, 
-      last_update_time, content, display_type, 
-      display_content)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, 
-      #{lastUpdateTime,jdbcType=TIMESTAMP}, #{content,jdbcType=VARCHAR}, #{displayType,jdbcType=INTEGER}, 
-      #{displayContent,jdbcType=LONGVARCHAR})
-  </insert>
-    <insert id="insertSelective" parameterType="com.jacknoob.blog.entity.Note">
-    insert into note
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+        <constructor>
+            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="publish_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="last_update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="display_type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="display_content" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="NoteInformation" type="com.jacknoob.blog.entity.Note" extends="BaseResultMap">
+        <collection property="tags" javaType="java.util.ArrayList" ofType="com.jacknoob.blog.entity.Tag">
+            <id property="id" column="tagId"/>
+            <result property="title" column="tagTitle"/>
+        </collection>
+    </resultMap>
+    <sql id="Blob_Column_List">
+        display_content
+    </sql>
+    <sql id="homePageColumn">
         id,
-      </if>
-      <if test="title != null">
         title,
-      </if>
-      <if test="publishTime != null">
         publish_time,
-      </if>
-      <if test="lastUpdateTime != null">
         last_update_time,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="displayType != null">
-        display_type,
-      </if>
-      <if test="displayContent != null">
         display_content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="publishTime != null">
-        #{publishTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="lastUpdateTime != null">
-        #{lastUpdateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="displayType != null">
-        #{displayType,jdbcType=INTEGER},
-      </if>
-      <if test="displayContent != null">
-        #{displayContent,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
+        display_type,
+        CHAR_LENGTH(content) as len
+    </sql>
+    <insert id="insert" parameterType="com.jacknoob.blog.entity.Note">
+        insert into note (id, title, publish_time, last_update_time, content, display_type, display_content)
+        values (#{id,jdbcType=INTEGER},
+                #{title,jdbcType=VARCHAR},
+                #{publishTime,jdbcType=TIMESTAMP},
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+                #{content,jdbcType=VARCHAR},
+                #{displayType,jdbcType=INTEGER},
+                #{displayContent,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jacknoob.blog.entity.Note">
+        insert into note
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="publishTime != null">
+                publish_time,
+            </if>
+            <if test="lastUpdateTime != null">
+                last_update_time,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="displayType != null">
+                display_type,
+            </if>
+            <if test="displayContent != null">
+                display_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="publishTime != null">
+                #{publishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateTime != null">
+                #{lastUpdateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="displayType != null">
+                #{displayType,jdbcType=INTEGER},
+            </if>
+            <if test="displayContent != null">
+                #{displayContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="enableCount" resultType="java.lang.Integer">
+        select count(1)
+        from note
+        where display_type = 2
+           or display_type = 1
+    </select>
+    <select id="enableTopCount" resultType="java.lang.Integer">
+        select count(1)
+        from note
+        where display_type = 1
+        # 置顶的文章类型为1
+    </select>
+    <select id="enableList" resultType="java.util.Map">
+        select
+        <include refid="homePageColumn"/>
+        from note where display_type=2 order by publish_time desc
+    </select>
+    <select id="enableTopList" resultType="java.util.Map">
+        select
+        <include refid="homePageColumn"/>
+        from note where display_type=1 order by id
+    </select>
+    <select id="getNoteById" resultMap="NoteInformation">
+        select note.id,
+               note.title,
+               note.publish_time,
+               last_update_time,
+               display_content,
+               display_type,
+               tags.title tagTitle,
+               tags.id    tagId,
+               content
+        from note
+                 left join note_has_tags n on note.id = n.noteId
+                 left join tags on n.tagId = tags.id
+        where note.id = #{id}
+    </select>
+    <select id="loadMore" resultType="java.util.Map">
+        SELECT id, title, publish_time, last_update_time, DATE_FORMAT(publish_time, '%Y/%m/%d') date
+        FROM `note`
+        order by date desc
+    </select>
+    <select id="getNoteByTagId" resultType="com.jacknoob.blog.entity.Note">
+        select id, title, publish_time, last_update_time
+        from note
+        where id in (select note_id from note_has_tags where tag_id = #{id})
+    </select>
 </mapper>

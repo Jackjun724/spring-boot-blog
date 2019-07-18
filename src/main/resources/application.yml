@@ -9,4 +9,4 @@ spring:
 
 mybatis:
   type-aliases-package: com.jacknoob.blog.entity
-  mapper-locations: classpath:resource/mapper/*.xml
+  mapper-locations: classpath:mappers/*.xml
