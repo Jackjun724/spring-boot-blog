@@ -22,10 +22,14 @@ public class OperationTime {
     private static final Logger logger = LoggerFactory.getLogger(OperationTime.class);
 
     @Pointcut("execution(* com.jacknoob.blog.web.rest.*.*(..))")
-    public void point() {
+    public void rest() {
     }
 
-    @Around("point()")
+    @Pointcut("execution(* com.jacknoob.blog.web.controller.*.*(..))")
+    public void controller() {
+    }
+
+    @Around("controller()||rest()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         boolean isDebug = logger.isDebugEnabled();
         if (isDebug) {

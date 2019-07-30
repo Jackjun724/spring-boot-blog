@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>404 - 你访问的页面消失了哦</title>
+    <link rel="stylesheet" th:href="@{css/reset.css}">
+    <link rel="stylesheet" th:href="@{css/404.css}">
+</head>
+<body>
+<div class="auto">
+    <div class="container">
+        <div class="settings">
+            <i class="icon"></i>
+            <h4>很抱歉！没有找到您要访问的页面！</h4>
+            <p><span id="num">5</span> 秒后将自动回到上一页!</p>
+            <div>
+                <a href="/" title="返回首页">返回首页</a>
+                <a href="javascript:" title="上一步" id="reload-btn">上一步</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    let $_num = document.querySelector("#num");
+    let num = parseInt($_num.innerHTML);
+    let numId = setInterval(function () {
+        num--;
+        $_num.innerHTML = num;
+        if (num === 0) {
+            clearInterval(numId);
+            window.history.back();
+        }
+    }, 1000);
+
+    let reloadPage = document.querySelector("#reload-btn");
+    reloadPage.onclick = function (e) {
+        window.history.back();
+    };
+</script>
+</body>
+</html>
