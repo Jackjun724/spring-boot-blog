@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,28 +31,28 @@ public class BlogController {
 
     @GetMapping("/index/{page}")
     public String homePage(@PathVariable("page") Integer page, Map<String, Object> map) {
-        Page<Note> pageVM = new Page<>();
+        Page<Map<String, Object>> pageVM = new Page<>();
         List<Map<String, Object>> result = blogService.getNoteListByPage(pageVM, Constants.HOME_PAGE_SIZE, page);
-        ResponseUtils.assemblyRefMap(map, result, pageVM);
+        ResponseUtils.assemblyRefMap(map, ResponseUtils.assemblyPage(pageVM, result));
         return "home/index";
     }
 
     @GetMapping({"/index", "/"})
     public String homePage(Map<String, Object> map) {
         blogService.pv();
-        Page<Note> pageResult = new Page<>();
+        Page<Map<String, Object>> pageResult = new Page<>();
         List<Map<String, Object>> result = blogService.getNoteListByPage(pageResult, Constants.HOME_PAGE_SIZE, 1);
-        ResponseUtils.assemblyRefMap(map, result, pageResult);
+        ResponseUtils.assemblyRefMap(map, ResponseUtils.assemblyPage(pageResult, result));
         return "home/index";
     }
 
     @GetMapping("/api/loadTimeline")
     @ResponseBody
-    public Map<String, Object> loadMore(int page) {
-        Page pageResult = new Page();
+    public Map<String, Object> loadMore(@RequestParam("page") int page) {
+        Page<Map<String, Object>> pageResult = new Page<>();
         pageResult.setPageSize(Constants.TIME_LINE_PAGE_SIZE);
         Map<String, Object> map = new HashMap<>(16);
-        ResponseUtils.assemblyRefMap(map, blogService.loadMoreByPage(page, pageResult), pageResult);
+        ResponseUtils.assemblyRefMap(map, ResponseUtils.assemblyPage(pageResult, blogService.loadMoreByPage(page, pageResult)));
         return map;
     }
 

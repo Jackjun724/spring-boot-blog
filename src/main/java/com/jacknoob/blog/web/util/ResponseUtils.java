@@ -1,7 +1,9 @@
 package com.jacknoob.blog.web.util;
 
 import com.jacknoob.blog.common.Constants;
+import com.jacknoob.blog.web.response.Page;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -12,15 +14,19 @@ import java.util.Map;
 public class ResponseUtils {
     /**
      * 规范数据装配
-     *
      * @param refMap 视图模型对象
      */
     public static void assemblyRefMap(final Map<String, Object> refMap, Object data) {
         refMap.put(Constants.ResponseProp.DATA.getPropName(), data);
     }
 
-    public static void assemblyRefMap(final Map<String, Object> refMap, Object data, Object page) {
-        refMap.put(Constants.ResponseProp.DATA.getPropName(), data);
-        refMap.put(Constants.ResponseProp.PAGE.getPropName(), page);
+    /**
+     * 装配分页数据
+     *
+     * @return 分页数据
+     */
+    public static <T> Page<T> assemblyPage(final Page<T> page, List<T> data) {
+        page.setData(data);
+        return page;
     }
 }

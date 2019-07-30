@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,6 +34,14 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(RestResponse.getResp(e.getMessage(), e.getData()), e.getStatus());
     }
 
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RestResponse formValidateFailed(MissingServletRequestParameterException e) {
+        logger.error("ParameterError:{}", e.getMessage());
+        return RestResponse.getResp("参数错误!");
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -48,8 +57,8 @@ public class GlobalExceptionHandler {
         return RestResponse.getResp(e.getMessage());
     }
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<?> globalException(RuntimeException e){
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> globalException(Exception e) {
         ByteArrayOutputStream exceptionStream = new ByteArrayOutputStream();
         e.printStackTrace(new PrintStream(exceptionStream));
         String exceptionMsg = exceptionStream.toString();

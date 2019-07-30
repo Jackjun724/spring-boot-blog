@@ -35,7 +35,7 @@ public class BlogService {
     @Autowired
     private NoteClickMapper noteClickMapper;
 
-    public List<Map<String, Object>> getNoteListByPage(Page<Note> pageVO, int pageSize, Integer pageNum) {
+    public List<Map<String, Object>> getNoteListByPage(Page<Map<String, Object>> pageVO, int pageSize, Integer pageNum) {
         pageVO.setPageSize(pageSize);
         pageVO.setPage(pageNum);
         pageVO.setTotal(noteMapper.enableCount());

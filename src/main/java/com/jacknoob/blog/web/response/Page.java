@@ -8,17 +8,17 @@ import java.util.List;
  * Life is not just about survival.
  */
 public class Page<T> {
-    private List<T> datas;
+    private List<T> data;
     private int total;
     private int pageSize;
     private int page;
 
-    public List<T> getDatas() {
-        return datas;
+    public List<T> getData() {
+        return data;
     }
 
-    public void setDatas(List<T> datas) {
-        this.datas = datas;
+    public void setData(List<T> data) {
+        this.data = data;
     }
 
     public int getTotal() {
