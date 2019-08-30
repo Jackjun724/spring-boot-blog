@@ -6,7 +6,7 @@ import com.jacknoob.blog.service.BlogService;
 import com.jacknoob.blog.web.response.Page;
 import com.jacknoob.blog.web.util.ResponseUtils;
 import com.jacknoob.blog.web.vm.NoteVM;
-import com.jacknoob.blog.web.vm.TagVM;
+import com.jacknoob.blog.web.vm.TagNoteVM;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -82,7 +82,7 @@ public class BlogController {
     @GetMapping("/tags/{id}")
     public String tag(@PathVariable("id") Integer id, Map<String, Object> map) {
         List<Note> notes = blogService.getNoteByTagId(id);
-        ResponseUtils.assemblyRefMap(map, new TagVM(blogService.getTagNameById(id), notes));
+        ResponseUtils.assemblyRefMap(map, new TagNoteVM(blogService.getTagNameById(id), notes));
         return "tags/list";
     }
 

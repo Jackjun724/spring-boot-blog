@@ -1,39 +1,35 @@
 package com.jacknoob.blog.web.vm;
 
-import com.jacknoob.blog.entity.Note;
-
-import java.util.List;
-
 /**
  * @author JackJun
- * 2019/7/30 15:01
+ * 2019/7/30 16:42
  * Life is just about survival.
  */
 public class TagVM {
-    private String tagName;
-    private List<Note> note;
-
-    public TagVM(String tagName, List<Note> note) {
-        this.tagName = tagName;
-        this.note = note;
-    }
+    private Integer id;
+    private String value;
 
     public TagVM() {
     }
 
-    public String getTagName() {
-        return tagName;
+    public TagVM(Integer id, String value) {
+        this.id = id;
+        this.value = value;
     }
 
-    public void setTagName(String tagName) {
-        this.tagName = tagName;
+    public Integer getId() {
+        return id;
     }
 
-    public List<Note> getNote() {
-        return note;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setNote(List<Note> note) {
-        this.note = note;
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }

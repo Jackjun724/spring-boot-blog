@@ -51,4 +51,24 @@
         set num = num + 1
         where date = current_date
     </update>
+
+    <select id="getWeekVisits" resultType="java.util.Map">
+        SELECT DATE_FORMAT(date, '%w') as weekd, sum(num) count
+        FROM pv
+        WHERE YEARWEEK(date_format(date, '%Y-%m-%d')) = YEARWEEK(now()) - 1
+        group by DATE_FORMAT(weekd, '%w')
+        order by DATE_FORMAT(weekd, '%w') asc
+    </select>
+
+    <select id="getDayVisitsNum" resultType="java.lang.Integer">
+        select ifnull(sum(num), 0) count
+        from pv
+        where pv.date = date_format(now(), '%Y-%m-%d')
+    </select>
+
+    <select id="getWeekVisitsNum" resultType="java.lang.Integer">
+        select ifnull(sum(num), 0) count
+        from pv
+        where YEARWEEK(date_format(date, '%Y-%m-%d')) = YEARWEEK(now())
+    </select>
 </mapper>

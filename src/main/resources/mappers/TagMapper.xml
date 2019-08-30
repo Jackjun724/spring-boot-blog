@@ -46,4 +46,29 @@
         from tags
         where id = #{id}
     </select>
+    <insert id="insertIgnore">
+        <selectKey resultType="integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert ignore into tags(title,publish_time) values
+        <foreach collection="tagList" item="tag" separator="," close=";">
+            (#{tag},now())
+        </foreach>
+    </insert>
+    <select id="selectiveSelect" resultType="java.lang.Integer">
+        select id from tags where title in
+        (
+        <foreach collection="tags" item="tag" separator=",">
+            #{tag}
+        </foreach>
+        )
+    </select>
+    <select id="testMethod" resultType="java.lang.Integer">
+        select id from tags where title in
+        (
+        <foreach collection="tags" item="tag" separator=",">
+            #{tag}
+        </foreach>
+        )
+    </select>
 </mapper>

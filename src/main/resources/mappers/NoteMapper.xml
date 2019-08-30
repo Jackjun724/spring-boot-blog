@@ -40,7 +40,7 @@
         display_type,
         CHAR_LENGTH(content) as len
     </sql>
-    <insert id="insert" parameterType="com.jacknoob.blog.entity.Note">
+    <insert id="insert" parameterType="com.jacknoob.blog.entity.Note" useGeneratedKeys="true" keyProperty="id">
         insert into note (id, title, publish_time, last_update_time, content, display_type, display_content)
         values (#{id,jdbcType=INTEGER},
                 #{title,jdbcType=VARCHAR},
@@ -132,8 +132,8 @@
                tags.id    tagId,
                content
         from note
-                 left join note_has_tags n on note.id = n.noteId
-                 left join tags on n.tagId = tags.id
+                 left join note_has_tags n on note.id = n.note_id
+                 left join tags on n.tag_id = tags.id
         where note.id = #{id}
     </select>
     <select id="loadMore" resultType="java.util.Map">
@@ -146,4 +146,19 @@
         from note
         where id in (select note_id from note_has_tags where tag_id = #{id})
     </select>
+    <delete id="deleteById">
+        delete
+        from note
+        where id = #{id}
+    </delete>
+    <update id="update" parameterType="com.jacknoob.blog.entity.Note">
+        update note
+        set title            = #{title,jdbcType=VARCHAR},
+            publish_time     = #{publishtime,jdbcType=TIMESTAMP},
+            last_update_time = #{lastupdatetime,jdbcType=TIMESTAMP},
+            content          = #{content,jdbcType=VARCHAR},
+            display_content  = #{displaycontent,jdbcType=VARCHAR},
+            display_type     = #{displaytype,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

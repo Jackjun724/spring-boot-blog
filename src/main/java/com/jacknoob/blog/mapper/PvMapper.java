@@ -16,4 +16,9 @@ public interface PvMapper {
 
     void addOneNow();
 
+    List<Map<String, Object>> getWeekVisits();
+
+    Integer getDayVisitsNum();
+
+    Integer getWeekVisitsNum();
 }

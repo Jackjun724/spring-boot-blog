@@ -79,4 +79,25 @@
             </if>
         </trim>
     </insert>
+
+    <select id="getTop6Reply" resultType="com.jacknoob.blog.entity.Reply">
+        select *
+        from reply
+        order by date desc
+        limit 0,6
+    </select>
+
+    <select id="getWeekDayReplyCount" resultType="java.util.Map">
+        SELECT DATE_FORMAT(date, '%w') as weekd, count(1) count
+        FROM reply
+        WHERE YEARWEEK(date_format(date, '%Y-%m-%d')) = YEARWEEK(now()) - 1
+        group by DATE_FORMAT(weekd, '%w')
+        order by date asc
+    </select>
+
+    <select id="getReplyCountByDay" resultType="java.lang.Integer">
+        select count(1) count
+        from reply
+        where date_format(date, '%Y-%m-%d') = date_format(now(), '%Y-%m-%d')
+    </select>
 </mapper>

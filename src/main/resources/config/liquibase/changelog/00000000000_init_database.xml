@@ -55,6 +55,7 @@
             <column type="${textType}" name="display_content" remarks="显示的摘要内容">
                 <constraints nullable="false"/>
             </column>
+            <!--1指定 2正常 3草稿-->
             <column type="int" name="display_type" remarks="显示类型">
                 <constraints nullable="false"/>
             </column>
@@ -116,4 +117,11 @@
         <renameColumn tableName="note_click" columnDataType="int" oldColumnName="clickNum" newColumnName="click_num"/>
     </changeSet>
 
+    <changeSet author="jack" id="20190730173960">
+        <renameColumn tableName="tags" columnDataType="datetime" oldColumnName="datetime" newColumnName="publish_time"/>
+    </changeSet>
+
+    <changeSet author="jack" id="20190730181130">
+        <renameTable oldTableName="note_has_tag" newTableName="note_has_tags"/>
+    </changeSet>
 </databaseChangeLog>

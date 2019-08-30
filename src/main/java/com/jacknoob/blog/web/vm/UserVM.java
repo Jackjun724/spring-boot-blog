@@ -1,4 +1,4 @@
-package com.jacknoob.blog.web.rest.vm;
+package com.jacknoob.blog.web.vm;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

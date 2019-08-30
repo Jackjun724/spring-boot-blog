@@ -36,4 +36,8 @@ public interface NoteMapper {
     List<Map<String, Object>> loadMore();
 
     List<Note> getNoteByTagId(Integer id);
+
+    int deleteById(int id);
+
+    int update(Note note);
 }

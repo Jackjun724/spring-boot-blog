@@ -1,4 +1,4 @@
-package com.jacknoob.blog.config;
+package com.jacknoob.blog.config.swagger;
 
 import com.google.common.collect.Lists;
 import org.springframework.context.annotation.Bean;

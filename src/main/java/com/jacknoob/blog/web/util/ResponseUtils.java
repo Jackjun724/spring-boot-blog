@@ -22,7 +22,6 @@ public class ResponseUtils {
 
     /**
      * 装配分页数据
-     *
      * @return 分页数据
      */
     public static <T> Page<T> assemblyPage(final Page<T> page, List<T> data) {

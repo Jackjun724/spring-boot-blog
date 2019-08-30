@@ -37,4 +37,15 @@
             </if>
         </trim>
     </insert>
+    <insert id="insertList">
+        insert ignore into note_has_tags(tag_id, note_id) values
+        <foreach collection="tagsId" separator="," close=";" item="tag">
+            (#{tag},#{noteId})
+        </foreach>
+    </insert>
+    <delete id="deleleSelective">
+        delete
+        from note_has_tags
+        where note_id = #{id}
+    </delete>
 </mapper>

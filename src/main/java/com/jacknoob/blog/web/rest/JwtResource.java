@@ -2,7 +2,7 @@ package com.jacknoob.blog.web.rest;
 
 import com.jacknoob.blog.security.JwtTokenProvider;
 import com.jacknoob.blog.web.exception.WebException;
-import com.jacknoob.blog.web.rest.vm.UserVM;
+import com.jacknoob.blog.web.vm.UserVM;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.data.redis.core.RedisTemplate;

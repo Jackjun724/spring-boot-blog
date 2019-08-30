@@ -10,6 +10,8 @@ public class Constants {
 
     public static final int HOME_PAGE_SIZE = 10;
 
+    public static final String SPRING_PROFILE_SWAGGER = "swagger";
+
     public enum ResponseProp {
         /**
          * prop:分页属性
