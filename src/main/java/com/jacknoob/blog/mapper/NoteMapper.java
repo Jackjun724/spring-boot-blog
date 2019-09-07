@@ -40,4 +40,8 @@ public interface NoteMapper {
     int deleteById(int id);
 
     int update(Note note);
+
+    List<Note> selectAll(List<String> filters, String orderByColumn, boolean isDesc, int i, int pageSize);
+
+    int count();
 }

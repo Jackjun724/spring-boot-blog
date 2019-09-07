@@ -8,11 +8,11 @@
     <property name="now" value="now()" dbms="mysql"/>
     <property name="autoIncrement" value="true"/>
     <property name="floatType" value="float4" dbms="postgresql, h2"/>
-    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql ,mariadb"/>
     <property name="doubleType" value="float8" dbms="postgresql, h2"/>
-    <property name="doubleType" value="double" dbms="mysql, oracle, mssql"/>
+    <property name="doubleType" value="double" dbms="mysql, oracle, mssql ,mariadb"/>
     <property name="textType" value="varchar" dbms="postgresql, h2"/>
-    <property name="textType" value="text" dbms="mysql, oracle, mssql"/>
+    <property name="textType" value="text" dbms="mysql, oracle, mssql , mariadb"/>
 
     <changeSet id="00000000001" author="jack">
         <createTable tableName="file" remarks="文件上传">

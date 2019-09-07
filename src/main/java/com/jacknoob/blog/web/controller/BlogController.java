@@ -7,6 +7,7 @@ import com.jacknoob.blog.web.response.Page;
 import com.jacknoob.blog.web.util.ResponseUtils;
 import com.jacknoob.blog.web.vm.NoteVM;
 import com.jacknoob.blog.web.vm.TagNoteVM;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -26,23 +28,15 @@ import java.util.Map;
  */
 @Controller
 public class BlogController {
-    @Autowired
+    @Inject
     private BlogService blogService;
 
-    @GetMapping("/index/{page}")
-    public String homePage(@PathVariable("page") Integer page, Map<String, Object> map) {
-        Page<Map<String, Object>> pageVM = new Page<>();
-        List<Map<String, Object>> result = blogService.getNoteListByPage(pageVM, Constants.HOME_PAGE_SIZE, page);
-        ResponseUtils.assemblyRefMap(map, ResponseUtils.assemblyPage(pageVM, result));
-        return "home/index";
-    }
-
-    @GetMapping({"/index", "/"})
-    public String homePage(Map<String, Object> map) {
+    @GetMapping({"/index", "/","/index/{page}"})
+    public String homePage(Map<String, Object> map, @PathVariable Integer page) {
         blogService.pv();
-        Page<Map<String, Object>> pageResult = new Page<>();
-        List<Map<String, Object>> result = blogService.getNoteListByPage(pageResult, Constants.HOME_PAGE_SIZE, 1);
-        ResponseUtils.assemblyRefMap(map, ResponseUtils.assemblyPage(pageResult, result));
+        Page<Map<String, Object>> pageVM = new Page<>();
+        List<Map<String, Object>> result = blogService.getNoteListByPage(pageVM, Constants.HOME_PAGE_SIZE, page==null?1:page);
+        ResponseUtils.assemblyRefMap(map, ResponseUtils.assemblyPage(pageVM, result));
         return "home/index";
     }
 

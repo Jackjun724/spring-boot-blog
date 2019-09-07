@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,7 +50,7 @@ public class NoteResource {
             , @RequestParam(value = "filters", required = false) List<String> filters
             , @RequestParam(value = "orderByColumn", required = false, defaultValue = "id") String orderByColumn
             , @RequestParam(value = "orderType", required = false, defaultValue = "false") Boolean isDesc) {
-
+        filters=filters==null?new ArrayList<>() :filters;
         return ResponseEntity.ok(PageResponse.getResp("获取成功!", noteService.noteList(page, filters, orderByColumn, isDesc)));
 
     }
