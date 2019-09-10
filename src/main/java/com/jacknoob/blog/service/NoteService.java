@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,14 +24,20 @@ import java.util.stream.Collectors;
 @Service
 public class NoteService {
 
-    @Inject
-    private TagMapper tagMapper;
+    private static final String PUBLISH_TIME = "publish_time";
+    private static final String PUBLISH_TIME_ALIAS = "publishtime";
+    private static final String LAST_UPDATE_TIME = "last_update_time";
+    private static final String LAST_UPDATE_TIME_ALIAS = "lastupdatetime";
+    private final TagMapper tagMapper;
+    private final NoteMapper noteMapper;
+    private final NoteHasTagsMapper noteHasTagsMapper;
 
-    @Inject
-    private NoteMapper noteMapper;
+    public NoteService(TagMapper tagMapper, NoteMapper noteMapper, NoteHasTagsMapper noteHasTagsMapper) {
+        this.tagMapper = tagMapper;
+        this.noteMapper = noteMapper;
+        this.noteHasTagsMapper = noteHasTagsMapper;
+    }
 
-    @Inject
-    private NoteHasTagsMapper noteHasTagsMapper;
 
     @Transactional(rollbackFor = Exception.class)
     public RestResponse addNote(@NotNull EditNoteVM vm) {
@@ -61,23 +66,7 @@ public class NoteService {
         return RestResponse.getResp("修改成功!");
     }
 
-
-    private Note assemblyNoteFromEditNoteVM(@NotNull EditNoteVM vm) {
-        return new Note(vm.getId(),
-                vm.getTitle()
-                , vm.getPublishTime() == null ? new Date(System.currentTimeMillis()) : vm.getPublishTime()
-                , vm.getLastUpdateTime() == null ? new Date(System.currentTimeMillis()) : vm.getLastUpdateTime()
-                , vm.getContent()
-                , vm.getDisplayType()
-                , vm.getDisplayContent());
-    }
-
-    private static final String PUBLISH_TIME = "publish_time";
-    private static final String PUBLISH_TIME_ALIAS = "publishtime";
-    private static final String LAST_UPDATE_TIME = "last_update_time";
-    private static final String LAST_UPDATE_TIME_ALIAS = "lastupdatetime";
-
-    public Page<List<Note>> noteList(Pageable page, List<String> filters, String orderByColumn, boolean isDesc) {
+    public Page<Note> noteList(Pageable page, List<String> filters, String orderByColumn, boolean isDesc) {
         //防止恶意注入
         filters = filters.stream().map(s -> s.replace("-","\\-").replace("'","\\'")).collect(Collectors.toList());
         //处理排序列
@@ -94,13 +83,28 @@ public class NoteService {
         );
     }
 
-    private Page<List<Note>> assembleNoteListVM(List<Note> tableData, int count, int pageSize, int pageNum) {
-//        Page<List<Note>> noteListVO = new PageVO<Note>();
-//        noteListVO.setCount(count);
-//        noteListVO.setPageNum(pageNum);
-//        noteListVO.setPageSize(pageSize);
-//        noteListVO.setTableData(tableData);
-//        return noteListVO;
-        return null;
+
+    public Note getNoteById(Integer id) {
+        return noteMapper.getNoteById(id);
+    }
+
+    private Note assemblyNoteFromEditNoteVM(@NotNull EditNoteVM vm) {
+        return new Note(vm.getId(),
+                vm.getTitle()
+                , vm.getPublishTime() == null ? new Date(System.currentTimeMillis()) : vm.getPublishTime()
+                , vm.getLastUpdateTime() == null ? new Date(System.currentTimeMillis()) : vm.getLastUpdateTime()
+                , vm.getContent()
+                , vm.getDisplayType()
+                , vm.getDisplayContent());
+    }
+
+    @NotNull
+    private Page<Note> assembleNoteListVM(List<Note> tableData, int count, int pageSize, int pageNum) {
+        Page<Note> page = new Page<>();
+        page.setTotal(count);
+        page.setPageSize(pageSize);
+        page.setPage(pageNum);
+        page.setData(tableData);
+        return page;
     }
 }

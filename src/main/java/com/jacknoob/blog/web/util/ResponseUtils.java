@@ -28,4 +28,20 @@ public class ResponseUtils {
         page.setData(data);
         return page;
     }
+
+    /**
+     * PageHelper page 对象转换为 简单的Response对象
+     *
+     * @param page pageHelper Entity
+     * @param <T>  DataType
+     * @return 简单的Response对象
+     */
+    public static <T> Page<T> pageHelperEntity2RespPage(com.github.pagehelper.Page<T> page) {
+        Page<T> res = new Page<>();
+        res.setData(page.getResult());
+        res.setPage(page.getPageNum());
+        res.setPageSize(page.getPageSize());
+        res.setTotal(page.getTotal());
+        return res;
+    }
 }

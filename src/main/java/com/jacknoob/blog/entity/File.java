@@ -1,10 +1,17 @@
 package com.jacknoob.blog.entity;
 
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class File {
     private Integer id;
 
+    @NotNull
+    @Size(min = 1, max = 20)
     private String title;
 
+    @NotNull
     private String url;
 
     private Integer status;

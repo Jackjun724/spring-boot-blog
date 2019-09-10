@@ -8,6 +8,10 @@
             <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
         </constructor>
+        <id column="*" property="id"/>
+        <result column="*" property="title"/>
+        <result column="*" property="url"/>
+        <result column="*" property="status"/>
     </resultMap>
     <insert id="insert" parameterType="com.jacknoob.blog.entity.File">
         insert into file (id, title, url, status)
@@ -44,4 +48,11 @@
             </if>
         </trim>
     </insert>
+    <select id="getFileList" resultMap="BaseResultMap">
+        select *
+        from file
+    </select>
+    <select id="getFileListByType" resultMap="BaseResultMap">
+        select * from file where status=#{type,jdbcType=INTEGER}
+    </select>
 </mapper>

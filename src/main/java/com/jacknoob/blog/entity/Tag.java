@@ -1,10 +1,12 @@
 package com.jacknoob.blog.entity;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 public class Tag {
     private Integer id;
 
+    @NotEmpty
     private String title;
 
     private Date publishTime;

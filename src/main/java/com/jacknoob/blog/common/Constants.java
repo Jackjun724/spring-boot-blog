@@ -12,6 +12,8 @@ public class Constants {
 
     public static final String SPRING_PROFILE_SWAGGER = "swagger";
 
+    public static final String GLOBAL_UPLOAD_PATH = "/data/upload/";
+
     public enum ResponseProp {
         /**
          * prop:分页属性

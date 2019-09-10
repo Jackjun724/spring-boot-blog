@@ -2,8 +2,6 @@ package com.jacknoob.blog.mapper;
 
 import com.jacknoob.blog.entity.Tag;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -32,10 +30,9 @@ public interface TagMapper {
     List<Integer> selectiveSelect(@Param("tags") List<String> tags);
 
     /**
-     * 根据名字列表查Id列表
-     *
-     * @param tags 标签名称列表
-     * @return id List
+     * 根据name删除标签
+     * @param tagName 标签name
+     * @return 受影响行数
      */
-    Page<Integer> testMethod(@Param("tags") List<String> tags, Pageable test);
+    int deleteTagByName(String tagName);
 }

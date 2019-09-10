@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Page<T> {
     private List<T> data;
-    private int total;
+    private long total;
     private int pageSize;
     private int page;
 
@@ -21,11 +21,11 @@ public class Page<T> {
         this.data = data;
     }
 
-    public int getTotal() {
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 

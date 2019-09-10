@@ -63,12 +63,7 @@
         </foreach>
         )
     </select>
-    <select id="testMethod" resultType="java.lang.Integer">
-        select id from tags where title in
-        (
-        <foreach collection="tags" item="tag" separator=",">
-            #{tag}
-        </foreach>
-        )
-    </select>
+    <delete id="deleteTagByName">
+        delete from tags where title = #{tagName};
+    </delete>
 </mapper>

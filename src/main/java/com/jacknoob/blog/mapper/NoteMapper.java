@@ -41,7 +41,7 @@ public interface NoteMapper {
 
     int update(Note note);
 
-    List<Note> selectAll(List<String> filters, String orderByColumn, boolean isDesc, int i, int pageSize);
+    List<Note> selectAll(@Param("tagsFilter") List<String> tagsFilter, @Param("orderByColumn") String orderByColumn, @Param("orderByRule") boolean isOrderByDesc, @Param("begin") int begin, @Param("end") int end);
 
     int count();
 }

@@ -29,26 +29,26 @@
         </collection>
     </resultMap>
     <sql id="Blob_Column_List">
-        display_content
+            display_content
     </sql>
     <sql id="homePageColumn">
-        id,
-        title,
-        publish_time,
-        last_update_time,
-        display_content,
-        display_type,
-        CHAR_LENGTH(content) as len
+            id,
+            title,
+            publish_time,
+            last_update_time,
+            display_content,
+            display_type,
+            CHAR_LENGTH(content) as len
     </sql>
     <insert id="insert" parameterType="com.jacknoob.blog.entity.Note" useGeneratedKeys="true" keyProperty="id">
         insert into note (id, title, publish_time, last_update_time, content, display_type, display_content)
         values (#{id,jdbcType=INTEGER},
-                #{title,jdbcType=VARCHAR},
-                #{publishTime,jdbcType=TIMESTAMP},
-                #{lastUpdateTime,jdbcType=TIMESTAMP},
-                #{content,jdbcType=VARCHAR},
-                #{displayType,jdbcType=INTEGER},
-                #{displayContent,jdbcType=LONGVARCHAR})
+        #{title,jdbcType=VARCHAR},
+        #{publishTime,jdbcType=TIMESTAMP},
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+        #{content,jdbcType=VARCHAR},
+        #{displayType,jdbcType=INTEGER},
+        #{displayContent,jdbcType=LONGVARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jacknoob.blog.entity.Note">
         insert into note
@@ -123,17 +123,17 @@
     </select>
     <select id="getNoteById" resultMap="NoteInformation">
         select note.id,
-               note.title,
-               note.publish_time,
-               last_update_time,
-               display_content,
-               display_type,
-               tags.title tagTitle,
-               tags.id    tagId,
-               content
+        note.title,
+        note.publish_time,
+        last_update_time,
+        display_content,
+        display_type,
+        tags.title tagTitle,
+        tags.id tagId,
+        content
         from note
-                 left join note_has_tags n on note.id = n.note_id
-                 left join tags on n.tag_id = tags.id
+        left join note_has_tags n on note.id = n.note_id
+        left join tags on n.tag_id = tags.id
         where note.id = #{id}
     </select>
     <select id="loadMore" resultType="java.util.Map">
@@ -153,12 +153,40 @@
     </delete>
     <update id="update" parameterType="com.jacknoob.blog.entity.Note">
         update note
-        set title            = #{title,jdbcType=VARCHAR},
-            publish_time     = #{publishtime,jdbcType=TIMESTAMP},
-            last_update_time = #{lastupdatetime,jdbcType=TIMESTAMP},
-            content          = #{content,jdbcType=VARCHAR},
-            display_content  = #{displaycontent,jdbcType=VARCHAR},
-            display_type     = #{displaytype,jdbcType=INTEGER}
+        set title = #{title,jdbcType=VARCHAR},
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+        content = #{content,jdbcType=VARCHAR},
+        display_content = #{displayContent,jdbcType=VARCHAR},
+        display_type = #{displayType,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="selectAll" resultMap="NoteInformation">
+        select t.*,note_has_tags.tag_id,tags.title tagTitle from (
+        select id,title,publish_time,last_update_time,content,display_content,display_type from note
+        where id not in (select note_id from note_has_tags where tag_id in (select id from tags where title in (''
+        <foreach collection="tagsFilter" item="tag" open="," separator=",">
+            #{tag}
+        </foreach>
+        )))
+        order by ${orderByColumn}
+        <if test="orderByRule">
+            desc
+        </if>
+        <if test="!orderByRule">
+            asc
+        </if>
+        limit #{begin},#{end}
+        ) as t
+        left join note_has_tags on note_has_tags.note_id=t.id
+        left join tags on note_has_tags.tag_id=tags.id
+        order by ${orderByColumn}
+        <if test="orderByRule">
+            desc
+        </if>
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from note
+    </select>
 </mapper>

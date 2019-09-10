@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +22,11 @@ import java.util.List;
 @RequestMapping("/api/note")
 public class NoteResource {
 
-    @Inject
-    private NoteService noteService;
+    private final NoteService noteService;
+
+    public NoteResource(NoteService noteService) {
+        this.noteService = noteService;
+    }
 
     @PostMapping
     @ApiOperation("发布文章")
@@ -39,7 +41,7 @@ public class NoteResource {
     }
 
     @PutMapping
-    @ApiOperation("发布文章")
+    @ApiOperation("修改文章")
     public ResponseEntity editNote(@RequestBody @Valid EditNoteVM note) {
         return ResponseEntity.ok(noteService.editNote(note));
     }
@@ -52,6 +54,11 @@ public class NoteResource {
             , @RequestParam(value = "orderType", required = false, defaultValue = "false") Boolean isDesc) {
         filters=filters==null?new ArrayList<>() :filters;
         return ResponseEntity.ok(PageResponse.getResp("获取成功!", noteService.noteList(page, filters, orderByColumn, isDesc)));
+    }
 
+    @GetMapping
+    @ApiOperation("根据ID查询文章")
+    public ResponseEntity getNoteById(@RequestParam("id") Integer id) {
+        return ResponseEntity.ok(noteService.getNoteById(id));
     }
 }
