@@ -56,7 +56,7 @@ public class NoteResource {
         return ResponseEntity.ok(PageResponse.getResp("获取成功!", noteService.noteList(page, filters, orderByColumn, isDesc)));
     }
 
-    @GetMapping
+    @GetMapping("/by")
     @ApiOperation("根据ID查询文章")
     public ResponseEntity getNoteById(@RequestParam("id") Integer id) {
         return ResponseEntity.ok(noteService.getNoteById(id));
