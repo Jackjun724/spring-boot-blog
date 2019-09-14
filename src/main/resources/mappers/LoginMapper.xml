@@ -6,15 +6,13 @@
             <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="user" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="type_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
         </constructor>
     </resultMap>
     <insert id="insert" parameterType="com.jacknoob.blog.entity.Login">
-        insert into login (id, user, password, type_id)
+        insert into login (id, user, password)
         values (#{id,jdbcType=INTEGER},
                 #{user,jdbcType=VARCHAR},
-                #{password,jdbcType=VARCHAR},
-                #{typeId,jdbcType=INTEGER})
+                #{password,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.jacknoob.blog.entity.Login">
         insert into login
@@ -28,9 +26,6 @@
             <if test="password != null">
                 password,
             </if>
-            <if test="typeId != null">
-                type_id,
-            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -41,9 +36,6 @@
             </if>
             <if test="password != null">
                 #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="typeId != null">
-                #{typeId,jdbcType=INTEGER},
             </if>
         </trim>
     </insert>

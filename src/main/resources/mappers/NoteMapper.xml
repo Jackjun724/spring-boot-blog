@@ -9,17 +9,7 @@
             <arg column="last_update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
             <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="display_type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-        </constructor>
-    </resultMap>
-    <resultMap id="ResultMapWithBLOBs" type="com.jacknoob.blog.entity.Note">
-        <constructor>
-            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="publish_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="last_update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="content" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="display_type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="display_content" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+            <arg column="display_content" javaType="java.lang.String" jdbcType="VARCHAR"/>
         </constructor>
     </resultMap>
     <resultMap id="NoteInformation" type="com.jacknoob.blog.entity.Note" extends="BaseResultMap">
@@ -128,8 +118,8 @@
         last_update_time,
         display_content,
         display_type,
-        tags.title tagTitle,
-        tags.id tagId,
+        tags.title tag_title,
+        tags.id tag_id,
         content
         from note
         left join note_has_tags n on note.id = n.note_id
@@ -162,7 +152,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <select id="selectAll" resultMap="NoteInformation">
-        select t.*,note_has_tags.tag_id,tags.title tagTitle from (
+        select t.*,note_has_tags.tag_id,tags.title tag_title from (
         select id,title,publish_time,last_update_time,content,display_content,display_type from note
         where id not in (select note_id from note_has_tags where tag_id in (select id from tags where title in (''
         <foreach collection="tagsFilter" item="tag" open="," separator=",">
@@ -188,5 +178,15 @@
     <select id="count" resultType="java.lang.Integer">
         select count(1)
         from note
+    </select>
+    <select id="countBy" resultType="java.lang.Integer">
+        select count(1) from (
+        select id from note
+        where id not in (select note_id from note_has_tags where tag_id in (select id from tags where title in (''
+        <foreach collection="tagsFilter" item="tag" open="," separator=",">
+            #{tag}
+        </foreach>
+        )))
+        ) as t
     </select>
 </mapper>

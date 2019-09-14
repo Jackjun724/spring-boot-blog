@@ -34,8 +34,12 @@ public class TagService {
     }
 
     public ServiceExecuteResult delTagByName(String tagName) {
+        int count = tagMapper.validTagIsUsing(tagName);
+        if (count > 0) {
+            return ServiceExecuteResult.createFailResult("删除失败！该标签正在使用！");
+        }
         tagMapper.deleteTagByName(tagName);
-        return ServiceExecuteResult.createFailResult("删除成功！");
+        return ServiceExecuteResult.createSuccessResult("删除成功！");
     }
 
     public ServiceExecuteResult createTag(Tag tag) {

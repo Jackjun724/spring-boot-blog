@@ -3,6 +3,7 @@ package com.jacknoob.blog.config;
 import com.jacknoob.blog.security.JwtAuthenticationEntryPoint;
 import com.jacknoob.blog.security.JwtAuthenticationFilter;
 import com.jacknoob.blog.security.UserDetailsServiceImpl;
+import com.jacknoob.blog.web.interceptor.CORSSecurityFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,6 +32,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Inject
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+    @Inject
+    private CORSSecurityFilter corsSecurityFilter;
 
     @Inject
     private UserDetailsServiceImpl userDetailsService;
@@ -74,11 +78,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/auth").permitAll()
                 .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/api/loadTimeline").permitAll();
-        //       开发时注释
-//                .antMatchers("/api/**")
-//                .authenticated();
+                .antMatchers("/api/loadTimeline").permitAll()
+                .antMatchers("/api/file/download").permitAll()
+                .antMatchers("/api/**")
+                .authenticated();
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(corsSecurityFilter, JwtAuthenticationFilter.class);
     }
 }

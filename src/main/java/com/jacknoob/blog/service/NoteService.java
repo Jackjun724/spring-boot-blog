@@ -77,7 +77,7 @@ public class NoteService {
         }
         return assembleNoteListVM(
                 noteMapper.selectAll(filters, orderByColumn, isDesc, (page.getPageNumber() - 1) * page.getPageSize(), page.getPageSize()),
-                noteMapper.count(),
+                noteMapper.countBy(filters),
                 page.getPageSize(),
                 page.getPageNumber()
         );

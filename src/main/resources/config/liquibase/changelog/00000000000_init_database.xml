@@ -124,4 +124,8 @@
     <changeSet author="jack" id="20190730181130">
         <renameTable oldTableName="note_has_tag" newTableName="note_has_tags"/>
     </changeSet>
+
+    <changeSet author="jack" id="201909142110">
+        <addUniqueConstraint tableName="tags" columnNames="title"/>
+    </changeSet>
 </databaseChangeLog>

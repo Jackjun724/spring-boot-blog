@@ -7,13 +7,10 @@ public class Login {
 
     private String password;
 
-    private Integer typeId;
-
     public Login(Integer id, String user, String password, Integer typeId) {
         this.id = id;
         this.user = user;
         this.password = password;
-        this.typeId = typeId;
     }
 
     public Login() {
@@ -42,13 +39,5 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
-    }
-
-    public Integer getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Integer typeId) {
-        this.typeId = typeId;
     }
 }

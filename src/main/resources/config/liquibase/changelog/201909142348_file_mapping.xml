@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql ,mariadb"/>
+    <property name="doubleType" value="float8" dbms="postgresql, h2"/>
+    <property name="doubleType" value="double" dbms="mysql, oracle, mssql ,mariadb"/>
+    <property name="textType" value="varchar" dbms="postgresql, h2"/>
+    <property name="textType" value="text" dbms="mysql, oracle, mssql , mariadb"/>
+
+    <changeSet author="jack" id="201909142349">
+        <createTable tableName="file_mapping" remarks="文件映射">
+            <column type="int" autoIncrement="${autoIncrement}" name="id">
+                <constraints primaryKey="true"/>
+            </column>
+            <column type="varchar(400)" name="path"/>
+            <column type="varchar(200)" name="key"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

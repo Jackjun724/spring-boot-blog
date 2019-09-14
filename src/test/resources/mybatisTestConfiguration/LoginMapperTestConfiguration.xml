@@ -11,16 +11,17 @@
         <environment id="default">
             <transactionManager type="JDBC"/>
             <dataSource type="UNPOOLED">
-                <property name="driver" value="org.mariadb.jdbc.Driver"/>
-                <property name="url" value="jdbc:mariadb://localhost:3306/blog_local"/>
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url"
+                          value="jdbc:mysql://localhost:3306/blog_local?characterEncoding=utf-8&amp;serverTimezone=GMT%2B8"/>
                 <property name="username" value="root"/>
-                <property name="password" value="123123"/>
+                <property name="password" value="123123qwe"/>
             </dataSource>
         </environment>
     </environments>
 
 
     <mappers>
-        <mapper resource="mappers/FileMapper.xml"/>
+        <mapper resource="mappers/LoginMapper.xml"/>
     </mappers>
 </configuration>

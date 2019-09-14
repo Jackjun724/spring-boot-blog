@@ -66,4 +66,7 @@
     <delete id="deleteTagByName">
         delete from tags where title = #{tagName};
     </delete>
+    <select id="validTagIsUsing" resultType="java.lang.Integer">
+        select count(1) from note_has_tags where tag_id = (select id from tags where title=#{name,jdbcType=VARCHAR})
+    </select>
 </mapper>

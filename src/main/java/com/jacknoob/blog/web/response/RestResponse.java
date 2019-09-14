@@ -1,6 +1,7 @@
 package com.jacknoob.blog.web.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.jacknoob.blog.web.util.ServiceExecuteResult;
 
 /**
  * @author JackJun
@@ -22,6 +23,9 @@ public class RestResponse<T> {
         return new RestResponse<>(message);
     }
 
+    public static <T> RestResponse<T> getResp(ServiceExecuteResult<T> result) {
+        return new RestResponse<>(result.getMessage(), result.getData());
+    }
 
     /* Constructor */
 

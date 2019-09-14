@@ -35,4 +35,6 @@ public interface TagMapper {
      * @return 受影响行数
      */
     int deleteTagByName(String tagName);
+
+    int validTagIsUsing(@Param("name") String tagName);
 }

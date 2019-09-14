@@ -1,8 +1,11 @@
-package com.jacknoob.blog.web.filter;
+package com.jacknoob.blog.web.interceptor;
 
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -23,7 +26,11 @@ public class CORSSecurityFilter implements Filter {
         res.setHeader("Access-Control-Allow-Headers", "Origin, No-Cache,X_Requested_With, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With, Authorization");
         res.setHeader("Access-Control-Allow-Credentials", "true");
         res.setHeader("XDomainRequestAllowed","1");
-
+        // 如果是OPTIONS则结束请求
+        if (HttpMethod.OPTIONS.toString().equals(((HttpServletRequest) servletRequest).getMethod())) {
+            ((HttpServletResponse) servletResponse).setStatus(HttpStatus.NO_CONTENT.value());
+            return;
+        }
         filterChain.doFilter(servletRequest, servletResponse);
 
     }

@@ -71,6 +71,8 @@ public class GlobalExceptionHandler {
         e.printStackTrace(new PrintStream(exceptionStream));
         String exceptionMsg = exceptionStream.toString();
         logger.error(exceptionMsg);
-        return new ResponseEntity<>(RestResponse.getResp(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        logger.error(e.getClass().getName());
+        //TODO 全局异常记录
+        return new ResponseEntity<>(RestResponse.getResp("内部程序错误！请联系管理员！"), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

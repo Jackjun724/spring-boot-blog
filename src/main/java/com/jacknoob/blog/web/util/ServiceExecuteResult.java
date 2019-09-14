@@ -1,5 +1,7 @@
 package com.jacknoob.blog.web.util;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * @author JackJun
  * 09/09/2019 18:29
@@ -23,6 +25,10 @@ public class ServiceExecuteResult<T> {
 
     public ServiceExecuteResult() {
 
+    }
+
+    public HttpStatus getHttpStatusCode() {
+        return success ? HttpStatus.OK : HttpStatus.BAD_REQUEST;
     }
 
     public static <T> ServiceExecuteResult createSuccessResult(String message, T data) {

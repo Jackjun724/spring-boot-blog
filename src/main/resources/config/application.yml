@@ -6,6 +6,10 @@ spring:
     cache: true
   profiles:
     active: dev
+  jackson:
+    default-property-inclusion: ALWAYS
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
 
 mybatis:
   type-aliases-package: com.jacknoob.blog.entity
