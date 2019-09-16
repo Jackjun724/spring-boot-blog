@@ -1,5 +1,6 @@
 package com.jacknoob.blog.web.util;
 
+import com.alibaba.fastjson.JSON;
 import com.jacknoob.blog.common.Constants;
 import com.jacknoob.blog.web.response.Page;
 
@@ -17,7 +18,8 @@ public class ResponseUtils {
      * @param refMap 视图模型对象
      */
     public static void assemblyRefMap(final Map<String, Object> refMap, Object data) {
-        refMap.put(Constants.ResponseProp.DATA.getPropName(), data);
+        //未知问题: 不用 FastJson 进行转换 Jackson处理出来的日期存在问题.
+        refMap.put(Constants.ResponseProp.DATA.getPropName(), JSON.parse(JSON.toJSONStringWithDateFormat(data, "yyyy-MM-dd HH:mm:ss")));
     }
 
     /**

@@ -12,7 +12,7 @@ public class Constants {
 
     public static final String SPRING_PROFILE_SWAGGER = "swagger";
 
-    public static final String GLOBAL_UPLOAD_PATH = "/data/upload/";
+    public static final String GLOBAL_UPLOAD_PATH = "F:\\UploadFile";
 
     public enum ResponseProp {
         /**

@@ -1,0 +1,148 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Jack's Blog</title>
+    <style>
+        #app {
+            display: none;
+        }
+
+        #animation {
+            transition: all 0.5s;
+            position: absolute;
+            left: 50%;
+            margin-left: -59px;
+            top: 10%;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            background-color: #ff2949;
+            margin: 100px auto;
+            -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+            animation: rotateplane 1.2s infinite ease-in-out;
+        }
+
+        @-webkit-keyframes rotateplane {
+            0% {
+                -webkit-transform: perspective(120px)
+            }
+            50% {
+                -webkit-transform: perspective(120px) rotateY(180deg)
+            }
+            100% {
+                -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+            }
+        }
+
+        @keyframes rotateplane {
+            0% {
+                transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+                -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+            }
+            50% {
+                transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+                -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+            }
+            100% {
+                transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+                -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            }
+        }
+    </style>
+    <link href="https://cdn.bootcss.com/element-ui/2.7.2/theme-chalk/index.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <div th:replace="common/head"></div>
+</head>
+<body>
+
+<div id="animation">
+    <div class="spinner"></div>
+    <h2 style="text-align: center;color:#999">Loading...</h2>
+</div>
+<div id="app">
+    <!--导航栏-->
+    <el-card :class="{hide:pageDown}" class="header-container">
+        <div class="nav-container">
+            <a class="active" href="/index">首页</a>
+            <a href="/timeline">归档</a>
+            <a href="/tags">标签</a>
+            <a href="/about">关于</a>
+        </div>
+    </el-card>
+    <div class="header-placeholder"></div>
+    <!-- 至顶部 -->
+    <div :class="{hideTop:top}" @click="toTop" class="top">
+        <i class="el-icon-download" style="transform: rotate(180deg);"></i>
+    </div>
+    <div class="main-container">
+        <transition-group
+                :css="false"
+                @before-enter="beforeEnter"
+                @enter="enter"
+                @leave="leave">
+            <div :data-index="index" :key="item.id" @click="openNote(item.id,item.last_update_time)" class="note-info"
+                 v-for="(item,index) in notes">
+                <el-card :class="{topping:item.display_type==1}" style="padding:0 10px 40px;">
+                    <div class="note-header-hr"></div>
+                    <div class="note-header" v-text="item.title"></div>
+                    <div class="note-message">
+                        <span>作者：JackJun</span>
+                        <span class="separator"></span>
+                        <span>字数 ≈ {{lenFormat(item.len)}}</span>
+                        <!--<span class="separator"></span>-->
+                        <!--<span>访问量 < 1k</span>-->
+                    </div>
+                    <div class="note-summary" v-text="item.display_content"></div>
+                    <div class="note-footer">
+                        <div class="note-date" v-text="dateFormat(item.publish_time)"></div>
+                    </div>
+                </el-card>
+            </div>
+        </transition-group>
+
+    </div>
+    <div class="page">
+        <el-pagination :current-page="page"
+                       :page-size="10"
+                       :total="total"
+                       @current-change="pageChange"
+                       layout="prev, pager, next"
+                       style="display: inline-block">
+        </el-pagination>
+    </div>
+    <footer class="footer">
+        <div class="title">
+            <a href="http://localhost:8080/index" target="_blank">Blog</a>
+            <a href="https://github.com/" target="_blank">Github</a>
+            <a href="https://gitee.com/" target="_blank">Gitee</a>
+            <a href="https://www.zhihu.com/" target="_blank">知乎</a>
+            <a href="https://leetcode-cn.com" target="_blank">LeetCode</a>
+        </div>
+        <div class="content">
+            <!-- TODO -->
+            <div class="p">本站已运行:181days&nbsp;&nbsp;|&nbsp;&nbsp;共计文章:78篇</div>
+            <div class="p">今日IP:712&nbsp;&nbsp;|&nbsp;&nbsp;PV:4005</div>
+            <div class="p">&copy; 2017 - 2019 JackJun's blog</div>
+            <a class="p" href="http://www.miibeian.gov.cn/publish/query/indexFirst.action" target="_blank">豫ICP备19007008号</a>
+        </div>
+    </footer>
+</div>
+<script th:inline="javascript">
+    let dataJson = [[${data}]]
+</script>
+<script src="https://cdn.bootcss.com/velocity/2.0.5/velocity.min.js"></script>
+<!--vue-->
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<!-- element-ui -->
+<script src="https://cdn.bootcss.com/element-ui/2.7.2/index.js"></script>
+<script th:src="@{/js/home.js}"></script>
+</body>
+</html>
+<script>
+    document.querySelector("#app").style.display = 'block';
+    document.querySelector("#animation").style.opacity = 0;
+    setTimeout(() => {
+        document.querySelector("#animation").style.display = 'none'
+    }, 500)
+</script>

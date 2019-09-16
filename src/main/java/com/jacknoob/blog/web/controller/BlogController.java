@@ -7,8 +7,6 @@ import com.jacknoob.blog.web.response.Page;
 import com.jacknoob.blog.web.util.ResponseUtils;
 import com.jacknoob.blog.web.vm.NoteVM;
 import com.jacknoob.blog.web.vm.TagNoteVM;
-import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,13 +29,13 @@ public class BlogController {
     @Inject
     private BlogService blogService;
 
-    @GetMapping({"/index", "/","/index/{page}"})
-    public String homePage(Map<String, Object> map, @PathVariable Integer page) {
+    @GetMapping(value = {"/index", "/", "/index/{page}"})
+    public String homePage(Map<String, Object> map, @PathVariable(required = false) Integer page) {
         blogService.pv();
         Page<Map<String, Object>> pageVM = new Page<>();
         List<Map<String, Object>> result = blogService.getNoteListByPage(pageVM, Constants.HOME_PAGE_SIZE, page==null?1:page);
         ResponseUtils.assemblyRefMap(map, ResponseUtils.assemblyPage(pageVM, result));
-        return "home/index";
+        return "pages/home";
     }
 
     @GetMapping("/api/loadTimeline")

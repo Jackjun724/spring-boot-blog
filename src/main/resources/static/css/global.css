@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    background: #f7f7f7;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+
+#app {
+    height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 67, 91);
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(255, 29, 28);
+}
+
+::selection {
+    background-color: rgb(255, 41, 73);
+    color: white;
+}
+
+/* 分页样式 */
+.el-pager li {
+    background: transparent;
+}
+
+.el-pagination button:disabled {
+    background: transparent;
+}
+
+.el-pagination .btn-next, .el-pagination .btn-prev {
+    background: transparent;
+}
+
+.el-pager li.active {
+    color: rgb(255, 41, 73);
+}
+
+.el-pager li:hover {
+    color: rgb(255, 41, 73);
+}

@@ -1,0 +1,41 @@
+.footer {
+
+}
+
+.footer .title {
+    border-top: 1px solid #e8e8e8;
+    height: 71px;
+    background: white;
+    min-width: 900px;
+    line-height: 71px;
+    text-align: center;
+}
+
+.footer .content {
+    background: white;
+    border-top: 1px solid #e8e8e8;
+    height: 150px;
+    min-width: 900px;
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+    padding-top: 20px;
+    box-sizing: border-box;
+}
+
+.footer .title a {
+    color: #999;
+    font-size: 12px;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer .title a:hover {
+    color: red;
+}
+
+.footer .content .p {
+    line-height: 25px;
+    text-decoration: none;
+    color: #999;
+}

@@ -7,7 +7,7 @@ spring:
     url: jdbc:mysql://localhost:3306/blog_local?characterEncoding=utf-8&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 123123
+    password: 123123qwe
     hikari:
       data-source-properties:
         cachePrepStmts: true
