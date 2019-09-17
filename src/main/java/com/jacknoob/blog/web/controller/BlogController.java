@@ -53,7 +53,7 @@ public class BlogController {
         Page pageResult = new Page();
         pageResult.setPageSize(5);
         ResponseUtils.assemblyRefMap(map, blogService.loadMoreByPage(1, pageResult));
-        return "timeline/index";
+        return "pages/time-line";
     }
 
     @GetMapping("/tags")
