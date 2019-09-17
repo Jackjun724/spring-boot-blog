@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>归档 - Zero's Blog</title>
-    <link href="https://cdn.bootcss.com/element-ui/2.7.2/theme-chalk/index.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/timeline.css}">
     <div th:replace="common/head"></div>
 </head>
@@ -12,16 +11,8 @@
     <h2 style="text-align: center;color:#999">Loading...</h2>
 </div>
 <div id="app">
-    <!--导航栏-->
-    <el-card class="header-container" :class="{hide:pageDown}">
-        <div class="nav-container">
-            <a href="/index">首页</a>
-            <a href="/timeline" class="active">归档</a>
-            <a href="/tags">标签</a>
-            <a href="/about">关于</a>
-        </div>
-    </el-card>
-    <div class="header-placeholder"></div>
+    <!-- 导航栏 -->
+    <div th:replace="common/header"></div>
     <!-- 至顶部 -->
     <div class="top" :class="{hideTop:top}" @click="toTop">
         <i class="el-icon-download" style="transform: rotate(180deg);"></i>
@@ -36,8 +27,8 @@
                 <el-timeline-item v-for="(item,index) in timeLineData" :timestamp="item.date" placement="top"
                                   type="primary" color="rgb(255, 41, 73)" :key="item.id" :data-index="index">
                     <el-card class="card" v-for="i in item.note" :key="i.id">
-                        <h4 @click="openNote(i.id,i.lastUpdateTime)">发布文章 {{i.title}}</h4>
-                        <p>发布于 {{dateFormat(i.publishTime)}}</p>
+                        <h4 @click="openNote(i.id)">发布文章 {{i.title}}</h4>
+                        <p>发布于 {{dateFormat(i.publish_time)}}</p>
                     </el-card>
                 </el-timeline-item>
             </transition-group>
@@ -47,25 +38,11 @@
         <div class="load-more" v-if="hasMore" @click="loadMore" v-text="isLoading?'加载中':'加载更多'"></div>
         <div class="load-more" v-else v-text="'已经到底了~'"></div>
     </div>
-    <footer class="footer">
-        <div class="title">
-            <a target="_blank" href="http://localhost:8080/index">Blog</a>
-            <a target="_blank" href="https://github.com/">Github</a>
-            <a target="_blank" href="https://gitee.com/">Gitee</a>
-            <a target="_blank" href="https://www.zhihu.com/">知乎</a>
-            <a target="_blank" href="https://leetcode-cn.com">LeetCode</a>
-        </div>
-        <div class="content">
-            <div class="p">本站已运行:181days&nbsp;&nbsp;|&nbsp;&nbsp;共计文章:78篇</div>
-            <div class="p">今日IP:712&nbsp;&nbsp;|&nbsp;&nbsp;PV:4005</div>
-            <div class="p">&copy; 2017 - 2019 JackJun's blog</div>
-            <a href="http://www.miibeian.gov.cn/publish/query/indexFirst.action" target="_blank" class="p">豫ICP备19007008号</a>
-        </div>
-    </footer>
+    <!-- 底部footer -->
+    <div th:replace="common/footer"></div>
 </div>
 <script th:inline="javascript">
     let dataJson = [[${data}]]
-    console.log(dataJson)
 </script>
 <!-- Axios -->
 <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
@@ -78,7 +55,7 @@
 </body>
 </html>
 <script>
-    document.querySelector("#app").style.display='block'
-    document.querySelector("#animation").style.opacity=0
+    document.querySelector("#app").style.display = 'block';
+    document.querySelector("#animation").style.opacity = 0;
     setTimeout(()=>{document.querySelector("#animation").style.display='none'},500)
 </script>

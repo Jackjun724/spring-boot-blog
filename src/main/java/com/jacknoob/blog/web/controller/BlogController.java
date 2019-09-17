@@ -33,19 +33,18 @@ public class BlogController {
     public String homePage(Map<String, Object> map, @PathVariable(required = false) Integer page) {
         blogService.pv();
         Page<Map<String, Object>> pageVM = new Page<>();
-        List<Map<String, Object>> result = blogService.getNoteListByPage(pageVM, Constants.HOME_PAGE_SIZE, page==null?1:page);
+        List<Map<String, Object>> result = blogService.getNoteListByPage(pageVM, Constants.HOME_PAGE_SIZE, page == null ? 1 : page);
         ResponseUtils.assemblyRefMap(map, ResponseUtils.assemblyPage(pageVM, result));
         return "pages/home";
     }
 
     @GetMapping("/api/loadTimeline")
     @ResponseBody
-    public Map<String, Object> loadMore(@RequestParam("page") int page) {
+    public Page loadMore(@RequestParam("page") int page) {
         Page<Map<String, Object>> pageResult = new Page<>();
         pageResult.setPageSize(Constants.TIME_LINE_PAGE_SIZE);
         Map<String, Object> map = new HashMap<>(16);
-        ResponseUtils.assemblyRefMap(map, ResponseUtils.assemblyPage(pageResult, blogService.loadMoreByPage(page, pageResult)));
-        return map;
+        return ResponseUtils.assemblyPage(pageResult, blogService.loadMoreByPage(page, pageResult));
     }
 
     @GetMapping("/timeline")
@@ -59,23 +58,23 @@ public class BlogController {
     @GetMapping("/tags")
     public String tags(Map<String, Object> map) {
         ResponseUtils.assemblyRefMap(map, blogService.findAllTags());
-        return "tags/index";
+        return "pages/tag/index";
     }
 
-    @GetMapping({"/note/{id}/{time}", "/note/{id}"})
-    public String note(@PathVariable("id") Integer id, @PathVariable(name = "time", required = false) Long time, Map<String, Object> map) {
+    @GetMapping("/note/{id}")
+    public String note(@PathVariable("id") Integer id, Map<String, Object> map) {
         //插入访问记录
         blogService.noteClick(id);
-        Note note = blogService.getNoteByIdAndLastUpdateTimestamp(id, time);
+        Note note = blogService.getNoteByIdAndLastUpdateTimestamp(id);
         ResponseUtils.assemblyRefMap(map, new NoteVM(blogService.getClickNum(id), note, note.getContent().length()));
-        return "note/index";
+        return "pages/note";
     }
 
     @GetMapping("/tags/{id}")
     public String tag(@PathVariable("id") Integer id, Map<String, Object> map) {
         List<Note> notes = blogService.getNoteByTagId(id);
         ResponseUtils.assemblyRefMap(map, new TagNoteVM(blogService.getTagNameById(id), notes));
-        return "tags/list";
+        return "pages/tag/list";
     }
 
     @GetMapping("/help/pay")

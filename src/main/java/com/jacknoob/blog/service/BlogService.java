@@ -9,7 +9,6 @@ import com.jacknoob.blog.mapper.PvMapper;
 import com.jacknoob.blog.mapper.TagMapper;
 import com.jacknoob.blog.web.response.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -65,14 +64,13 @@ public class BlogService {
     }
 
     /**
-     * 根据文章最后更新时间判断Redis缓存命中 TODO 存在浪费内存问题 待修复  处理 timestamp为空的可能性
-     *
+     * 根据文章ID判断Redis缓存命中 , 在 修改文章的时候更新缓存
+     * //TODO Redis
      * @param id        文章ID
-     * @param timestamp 文章lastUpdateTimestamp
      * @return Entity
      */
-    @Cacheable("note")
-    public Note getNoteByIdAndLastUpdateTimestamp(Integer id, Long timestamp) {
+//    @Cacheable("note")
+    public Note getNoteByIdAndLastUpdateTimestamp(Integer id) {
         return noteMapper.getNoteById(id);
     }
 

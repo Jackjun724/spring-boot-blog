@@ -1,0 +1,40 @@
+.main-container {
+    margin: 60px auto;
+    width: 500px;
+    text-align: center;
+}
+
+.tag {
+    font-size: 12px;
+    color: #333;
+    display: inline-block;
+    padding: 6px 15px 11px 25px;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+    position: relative;
+    user-select: none;
+    cursor: pointer;
+    margin: 10px 5px;
+}
+
+.tag:before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    background-color: #e8e8e8;
+    border-radius: 30px;
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    z-index: 2;
+}
+
+.tag-icon {
+    position: absolute;
+    content: '';
+    width: 30%;
+    height: 2px;
+    left: 27px;
+    top: 24px;
+}

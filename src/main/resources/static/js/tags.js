@@ -7,10 +7,8 @@ let vue = new Vue({
         top: false,
 
         /* 页面数据 */
-        name: '首页',
-        notes: [],
-        total: 0,
-        page: 1
+        name: '标签',
+        tags: []
     },
     methods: {
         /* 页面效果 每个页面都有 */
@@ -36,54 +34,44 @@ let vue = new Vue({
         /* 页面初始化效果 */
         beforeEnter: function (el) {
             el.style.opacity = 0;
-            el.style.marginTop = '80px'
+            el.style.marginLeft = '15px'
         },
-        enter(el, done) {
-            const delay = el.dataset.index * 150;
+        enter: function (el, done) {
+            let delay = el.dataset.index * 50;
             setTimeout(function () {
                 Velocity(
                     el,
-                    {opacity: 1, marginTop: '60px'},
+                    {opacity: 1, marginLeft: '5px'},
                     {complete: done}
                 )
             }, delay)
         },
-        leave(el, done) {
-            const delay = el.dataset.index * 16.66667 * 10;
+        leave: function (el, done) {
+            let delay = el.dataset.index * 50;
             setTimeout(function () {
                 Velocity(
                     el,
-                    {opacity: 0, marginTop: '80px'},
+                    {opacity: 0, marginLeft: '15px'},
                     {complete: done}
                 )
             }, delay)
         },
-
-        dateFormat(nS) {
-            if (nS) {
-                let str = nS.toString();
-                return str.substring(2, str.length - 3)
-            }
-            return ''
+        randomColors: function () {
+            let colors = ['red', '#3181ff', '#ff2949', '#ffcc3b', '#5d5dff', '#5bff0f'];
+            let count = Math.round(Math.random() * (colors.length - 1));
+            return colors[count]
         },
-        lenFormat(len) {
-            //保留一位小数
-            return parseFloat(Math.ceil(len / 100) / 10) + 'k';
-        },
-        openNote(id) {
-            window.location = `/note/${id}`
-        },
-        pageChange(page) {
-            window.location = `/index/${page}`
+        openTag: function (id) {
+            window.location = `/tags/${id}`
         }
-    },
+    }
+    ,
     mounted() {
         //向下翻隐藏导航
         window.addEventListener("scroll", this.scrollChange);
-        this.notes.push(...dataJson['data'])
-    },
-    created() {
-        this.total = dataJson['total'];
-        this.page = dataJson['page']
+
+        this.tags.push(
+            ...dataJson
+        )
     }
 });

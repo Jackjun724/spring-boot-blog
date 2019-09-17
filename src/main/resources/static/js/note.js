@@ -7,15 +7,18 @@ let vue = new Vue({
         top: false,
 
         /* 页面数据 */
-        name: '首页',
-        notes: [],
-        total: 0,
-        page: 1
+        name: '文章',
+        markdownText: '',
+        tocHtml: '',
+        isChange: false,
+        click: 0,
+        len: 0,
+        note: {}
     },
     methods: {
         /* 页面效果 每个页面都有 */
         scrollChange() {
-            let afterScroll = window.scrollY;
+            let afterScroll = document.body.scrollTop;
             if (afterScroll <= 90) {
                 this.pageDown = false;
                 this.top = false
@@ -36,54 +39,54 @@ let vue = new Vue({
         /* 页面初始化效果 */
         beforeEnter: function (el) {
             el.style.opacity = 0;
-            el.style.marginTop = '80px'
+            el.style.marginTop = '20px'
         },
-        enter(el, done) {
-            const delay = el.dataset.index * 150;
+        enter: function (el, done) {
+            var delay = 250;
             setTimeout(function () {
                 Velocity(
                     el,
-                    {opacity: 1, marginTop: '60px'},
+                    {opacity: 1, marginTop: '0'},
                     {complete: done}
                 )
             }, delay)
         },
-        leave(el, done) {
-            const delay = el.dataset.index * 16.66667 * 10;
+        leave: function (el, done) {
+            var delay = 250;
             setTimeout(function () {
                 Velocity(
                     el,
-                    {opacity: 0, marginTop: '80px'},
+                    {opacity: 0, marginTop: '20px'},
                     {complete: done}
                 )
             }, delay)
         },
-
-        dateFormat(nS) {
-            if (nS) {
-                let str = nS.toString();
-                return str.substring(2, str.length - 3)
-            }
-            return ''
+        randomIcon: function () {
+            let random = ['1', '2', ''];
+            return random[parseInt(Math.random() * 3)]
         },
-        lenFormat(len) {
+        openNote: function (id, time) {
+            window.location = `/note/${id}/${time}`
+        },
+        dateFormat: function (nS) {
+            return nS
+        },
+        lenFormat: function () {
             //保留一位小数
-            return parseFloat(Math.ceil(len / 100) / 10) + 'k';
+            return parseFloat(Math.ceil(this.len / 100) / 10) + 'k';
         },
-        openNote(id) {
-            window.location = `/note/${id}`
+        randomColors: function () {
+            let colors = ['red', '#3181ff', '#ff2949', '#ffba16', '#5d5dff', '#24c5ff'];
+            let count = Math.round(Math.random() * (colors.length - 1));
+            return colors[count]
         },
-        pageChange(page) {
-            window.location = `/index/${page}`
+        openTag: function (id) {
+            window.location = `/tags/${id}`
         }
-    },
+    }
+    ,
     mounted() {
         //向下翻隐藏导航
-        window.addEventListener("scroll", this.scrollChange);
-        this.notes.push(...dataJson['data'])
-    },
-    created() {
-        this.total = dataJson['total'];
-        this.page = dataJson['page']
+        window.addEventListener("scroll", this.scrollChange)
     }
 });

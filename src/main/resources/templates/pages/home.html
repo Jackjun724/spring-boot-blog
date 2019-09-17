@@ -1,7 +1,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Zero's Blog</title>
-    <link href="https://cdn.bootcss.com/element-ui/2.7.2/theme-chalk/index.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/home.css}">
     <div th:replace="common/head"></div>
 </head>
@@ -12,16 +11,8 @@
     <h2 style="text-align: center;color:#999">Loading...</h2>
 </div>
 <div id="app">
-    <!--导航栏-->
-    <el-card :class="{hide:pageDown}" class="header-container">
-        <div class="nav-container">
-            <a class="active" href="/index">首页</a>
-            <a href="/timeline">归档</a>
-            <a href="/tags">标签</a>
-            <a href="/about">关于</a>
-        </div>
-    </el-card>
-    <div class="header-placeholder"></div>
+    <!-- 导航栏 -->
+    <div th:replace="common/header"></div>
     <!-- 至顶部 -->
     <div :class="{hideTop:top}" @click="toTop" class="top">
         <i class="el-icon-download" style="transform: rotate(180deg);"></i>
@@ -32,7 +23,7 @@
                 @before-enter="beforeEnter"
                 @enter="enter"
                 @leave="leave">
-            <div :data-index="index" :key="item.id" @click="openNote(item.id,item.last_update_time)" class="note-info"
+            <div :data-index="index" :key="item.id" @click="openNote(item.id)" class="note-info"
                  v-for="(item,index) in notes">
                 <el-card :class="{topping:item.display_type==1}" style="padding:0 10px 40px;">
                     <div class="note-header-hr"></div>
@@ -62,22 +53,8 @@
                        style="display: inline-block">
         </el-pagination>
     </div>
-    <footer class="footer">
-        <div class="title">
-            <a href="http://localhost:8080/index" target="_blank">Blog</a>
-            <a href="https://github.com/" target="_blank">Github</a>
-            <a href="https://gitee.com/" target="_blank">Gitee</a>
-            <a href="https://www.zhihu.com/" target="_blank">知乎</a>
-            <a href="https://leetcode-cn.com" target="_blank">LeetCode</a>
-        </div>
-        <div class="content">
-            <!-- TODO -->
-            <div class="p">本站已运行:181days&nbsp;&nbsp;|&nbsp;&nbsp;共计文章:78篇</div>
-            <div class="p">今日IP:712&nbsp;&nbsp;|&nbsp;&nbsp;PV:4005</div>
-            <div class="p">&copy; 2017 - 2019 JackJun's blog</div>
-            <a class="p" href="http://www.miibeian.gov.cn/publish/query/indexFirst.action" target="_blank">豫ICP备19007008号</a>
-        </div>
-    </footer>
+    <!-- 底部footer -->
+    <div th:replace="common/footer"></div>
 </div>
 <script th:inline="javascript">
     let dataJson = [[${data}]]
