@@ -1,7 +1,6 @@
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-.mvn/
 !**/src/main/**
 !**/src/test/**
 
@@ -35,3 +34,4 @@ build/
 ### runtime log ###
 runtime.log
 *.gz
+.mvn/
