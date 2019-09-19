@@ -1,0 +1,371 @@
+.main-container {
+    min-width: 900px;
+    background: white;
+    margin-top: -14px;
+    position: relative;
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+.note-content {
+    width: 900px;
+    margin: 0 auto 60px auto;
+    line-height: 2;
+    color: #555;
+}
+
+.note-footer {
+    width: 900px;
+    line-height: 2;
+    color: #555;
+    background: white;
+    margin: 15px auto;
+    text-align: center;
+    padding: 50px;
+    box-sizing: border-box;
+    border-top: 1px solid #e8e8e8;
+}
+
+.note-tag {
+    color: white;
+    padding: 4px 9px;
+    border-radius: 30px;
+    font-size: 13px;
+    margin-top: 10px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.note-title {
+    color: white;
+    position: absolute;
+    top: 80px;
+    padding: 25px;
+    font-size: 34px;
+    box-sizing: border-box;
+    left: 50%;
+    margin: 0 auto 0 -450px;
+}
+
+.note-time {
+    font-size: 12px;
+    line-height: 20px;
+    color: #ffffff5e;
+}
+
+.note-footer {
+
+}
+
+.pay-container {
+    display: inline-block;
+}
+
+#reply-container {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.tree-node {
+    display: inline-block;
+    padding: 0 20px;
+    position: fixed;
+    bottom: 75px;
+    right: 70px;
+    transition: all .3s cubic-bezier(0, 1.26, 0.24, 1.44);
+}
+
+.tree-list {
+    width: 40px;
+    height: 40px;
+    background: #ff1d1c;
+    color: white;
+    text-align: center;
+    padding-top: 6px;
+    box-sizing: border-box;
+    border-radius: 3px;
+    position: fixed;
+    right: 20px;
+    bottom: 75px;
+    transform-origin: 50% 50%;
+    transition: all 0.4s;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.markdownIt-TOC a {
+    text-decoration: none;
+    font-size: 13px;
+    color: #666;
+    transition: all 0.3s;
+}
+
+.markdownIt-TOC a:hover {
+    color: red;
+}
+
+.markdownIt-TOC li {
+    list-style: none;
+}
+
+.markdownIt-TOC {
+    border-left: 1px solid #ff4a4d;
+    text-align: left;
+}
+
+.markdownIt-TOC {
+    padding-inline-start: 15px;
+}
+
+.markdownIt-TOC ul {
+    padding-inline-start: 25px;
+}
+
+.markdownIt-TOC > li, .markdownIt-TOC > li > ul > li {
+    position: relative;
+}
+
+.markdownIt-TOC > li:before {
+    content: '';
+    display: block;
+    height: 9px;
+    width: 9px;
+    position: absolute;
+    background: #ff4a4d;
+    border-radius: 30px;
+    left: -23px;
+    top: 0;
+    border: 3px solid #ffaeaf;
+}
+
+.markdownIt-TOC > li > ul > li:before {
+    content: '';
+    display: block;
+    height: 5px;
+    width: 5px;
+    position: absolute;
+    background: #ff4a4d;
+    border-radius: 30px;
+    left: -46px;
+    border: 3px solid #ffaeaf;
+    top: 6px;
+}
+
+.tree-icon {
+    height: 3px;
+    width: 21px;
+    background: white;
+    display: inline-block;
+    position: absolute;
+    top: 18px;
+    left: 10px;
+    transition: all .3s;
+}
+
+.tree-icon:before {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 21px;
+    background: white;
+    display: inline-block;
+    top: -8px;
+    left: 0;
+    transform-origin: 0 100%;
+    transition: all .3s;
+}
+
+.tree-icon:after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 21px;
+    top: 8px;
+    background: white;
+    display: inline-block;
+    left: 0;
+    transform-origin: 0 0;
+    transition: all .3s;
+}
+
+.change {
+    width: 0 !important;
+}
+
+.change:after {
+    transform: rotate(-45deg);
+}
+
+.change:before {
+    transform: rotate(45deg);
+}
+
+.hidelist {
+    transform: scale(0);
+    transform-origin: 100% 100%;
+}
+
+/* Markdown样式 */
+.markdownIt-Anchor {
+    text-decoration: none;
+    color: #f14c4c;
+    font-weight: 900;
+    font-size: 20px;
+    user-select: none;
+}
+
+p {
+    letter-spacing: 1px;
+}
+
+p code, li code {
+    color: #4d4d4c;
+    font-size: 14px;
+    background: #f0f0f0;
+    line-height: 1.6;
+    border-radius: 5px;
+    padding: 5px;
+    font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+    letter-spacing: 0;
+}
+
+pre {
+    position: relative;
+    background: #1E1E1E !important;
+    color: #DCDCDC !important;
+    border-radius: 3px;
+    overflow-x: auto;
+}
+
+pre:before {
+    display: block;
+    content: '';
+    width: 43px;
+    border-right: 3px solid #424242;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #00000040;
+    z-index: 9;
+}
+
+.line-numbers {
+    font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+    line-height: 1.6;
+    border-radius: 5px;
+    font-size: 14px;
+    position: relative;
+    display: block;
+    padding-left: 47px;
+}
+
+.line-numbers li {
+    padding-left: 5px;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 18px;
+    border-bottom: 1px solid #e8e8e8;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+h4 {
+    font-size: 14px;
+}
+
+h5 {
+    font-size: 12px;
+}
+
+h6 {
+    font-size: 10px;
+}
+
+blockquote {
+    padding: 0 1em;
+    color: #6a737d;
+    border-left: .25em solid #dfe2e5;
+    margin-left: 0;
+}
+
+.header-anchor {
+    color: #5479a8;
+    text-decoration: none;
+}
+
+.table-of-contents a {
+    color: #999;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 2;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.table-of-contents a:hover {
+    color: #87daff !important;
+}
+
+@media (max-width: 1200px) {
+    .table-of-contents {
+        width: 0 !important;
+    }
+
+    .note-container {
+        padding-right: 0 !important;
+        margin: 0 auto;
+    }
+}
+
+.table-of-contents:before {
+    content: '文章目录';
+    text-align: center;
+    display: block;
+    padding-top: 20px;
+    padding-bottom: 5px;
+    width: 70%;
+    margin: 0 auto;
+    border-bottom: 1px solid #87daff;
+}
+
+.table-of-contents > ol > li {
+    list-style-type: decimal;
+}
+
+.table-of-contents > ol > li > ol > li {
+    list-style-type: upper-roman;
+}
+
+.table-of-contents > ol > li > ol > li > ol > li {
+    list-style-type: disc;
+}
+
+.table-of-contents {
+    line-height: 2;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 300px;
+    background-color: #222;
+    color: #87daff;
+    min-height: 400px;
+    height: 100%;
+    transition: all 0.3s;
+    z-index: 9999;
+}
+
+ul {
+    padding-inline-start: 30px;
+}

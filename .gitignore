@@ -30,3 +30,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### runtime log ###
+runtime.log
+*.gz

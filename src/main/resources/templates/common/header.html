@@ -1,0 +1,10 @@
+<!--导航栏-->
+<el-card :class="{hide:pageDown}" class="header-container">
+    <div class="nav-container">
+        <a :class="{active:name==='首页'}" href="/index">首页</a>
+        <a :class="{active:name==='归档'}" href="/timeline">归档</a>
+        <a :class="{active:name==='标签'}" href="/tags">标签</a>
+        <a :class="{active:name==='关于'}" href="/about">关于</a>
+    </div>
+</el-card>
+<div class="header-placeholder"></div>
