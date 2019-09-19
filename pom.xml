@@ -165,6 +165,7 @@
     </dependencies>
 
     <build>
+        <finalName>blog</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -207,8 +208,6 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
-                        <configuration>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
