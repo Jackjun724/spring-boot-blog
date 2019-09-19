@@ -4,8 +4,6 @@ spring:
   thymeleaf:
     mode: HTML
     cache: true
-  profiles:
-    active: dev
   jackson:
     default-property-inclusion: ALWAYS
     time-zone: GMT+8

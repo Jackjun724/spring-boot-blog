@@ -4,10 +4,10 @@ server:
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/blog_local?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://47.101.144.140:3306/blog_local?characterEncoding=utf-8&serverTimezone=GMT%2B8
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: 123123qwe
+    password: 123456
     hikari:
       data-source-properties:
         cachePrepStmts: true
@@ -30,7 +30,7 @@ logging:
     com:
       jacknoob:
         blog:
-          debug
+          info
 
 security:
   jwtSecret: c0406b24d2d3447fa2eecc52f8550a63
