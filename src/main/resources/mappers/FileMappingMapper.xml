@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jacknoob.blog.mapper.FileMappingMapper">
+    <resultMap id="BaseResultMap" type="com.jacknoob.blog.entity.FileMapping">
+        <constructor>
+            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="path" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="key" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+        <id column="*" property="id"/>
+        <result column="*" property="path"/>
+        <result column="*" property="key"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.jacknoob.blog.entity.FileMapping">
+        insert into file_mapping (id, path, `key`)
+        values (#{id,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR})
+    </insert>
+    <select id="getPathByKey" resultType="java.lang.String">
+        select path from file_mapping where `key` = #{key,jdbcType=VARCHAR} limit 0,1
+    </select>
+</mapper>

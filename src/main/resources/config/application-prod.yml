@@ -1,0 +1,40 @@
+server:
+  port: 7999
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://47.101.144.140:3306/blog_local?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    hikari:
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    lettuce.pool.max-active: 8
+    lettuce.pool.max-wait: -1
+    lettuce.pool.max-idle: 8
+    lettuce.pool.min-idle: 0
+
+logging:
+  file: runtime.log
+  level:
+    com:
+      jacknoob:
+        blog:
+          info
+
+security:
+  jwtSecret: c0406b24d2d3447fa2eecc52f8550a63
+  # 一个月
+  jwtExpirationInMs: 259200000
+
+

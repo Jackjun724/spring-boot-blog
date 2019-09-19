@@ -1,42 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.luckyvv.blog.mapper.TagMapper">
-  <resultMap id="BaseResultMap" type="cn.luckyvv.blog.entity.Tag">
-    <constructor>
-      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="publish_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-    </constructor>
-  </resultMap>
-  <insert id="insert" parameterType="cn.luckyvv.blog.entity.Tag">
-    insert into tags (id, title, publish_time
-      )
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="cn.luckyvv.blog.entity.Tag">
-    insert into tags
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="publishTime != null">
-        publish_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="publishTime != null">
-        #{publishTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
+<mapper namespace="com.jacknoob.blog.mapper.TagMapper">
+    <resultMap id="BaseResultMap" type="com.jacknoob.blog.entity.Tag">
+        <constructor>
+            <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="publish_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+        </constructor>
+    </resultMap>
+    <insert id="insert" parameterType="com.jacknoob.blog.entity.Tag">
+        insert into tags (id, title, publish_time)
+        values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jacknoob.blog.entity.Tag">
+        insert into tags
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="publishTime != null">
+                publish_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="publishTime != null">
+                #{publishTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <select id="getAllTags" resultType="com.jacknoob.blog.entity.Tag">
+        select id, title
+        from tags
+    </select>
+    <select id="getTagNameById" resultType="java.lang.String">
+        select title
+        from tags
+        where id = #{id}
+    </select>
+    <insert id="insertIgnore">
+        <selectKey resultType="integer" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert ignore into tags(title,publish_time) values
+        <foreach collection="tagList" item="tag" separator="," close=";">
+            (#{tag},now())
+        </foreach>
+    </insert>
+    <select id="selectiveSelect" resultType="java.lang.Integer">
+        select id from tags where title in
+        (
+        <foreach collection="tags" item="tag" separator=",">
+            #{tag}
+        </foreach>
+        )
+    </select>
+    <delete id="deleteTagByName">
+        delete from tags where title = #{tagName};
+    </delete>
+    <select id="validTagIsUsing" resultType="java.lang.Integer">
+        select count(1) from note_has_tags where tag_id = (select id from tags where title=#{name,jdbcType=VARCHAR})
+    </select>
 </mapper>

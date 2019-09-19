@@ -1,0 +1,135 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Jack's Blog</title>
+    <div th:replace="common/head"></div>
+    <link rel="stylesheet" th:href="@{/css/note.css}">
+    <link rel="stylesheet" th:href="@{/css/solarized-dark.css}">
+
+</head>
+<body>
+<div id="animation">
+    <div class="spinner"></div>
+    <h2 style="text-align: center;color:#999">Loading...</h2>
+</div>
+<script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!--<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>-->
+<div id="app" v-cloak>
+    <!-- 导航栏 -->
+    <div th:replace="common/header"></div>
+    <!-- 至顶部 -->
+    <div :class="{hideTop:top}" @click="toTop" class="top">
+        <i class="el-icon-download" style="transform: rotate(180deg);"></i>
+    </div>
+    <div class="main-container">
+        <div id="particles-js"
+             style="filter: blur(1px);min-width: 900px;height:300px;overflow: hidden;background-color: black;transition: all 0.5s;">
+            <canvas class="particles-js-canvas-el">
+            </canvas>
+        </div>
+        <div class="note-title">
+            {{note.title}}
+            <div class="note-time">发布于 {{note.publish_time}}</div>
+            <div class="note-time">最后更新于 {{note.last_update_time}}</div>
+            <div class="note-time">约 {{ lenFormat() }} 字 | Views {{click}}</div>
+            <span :style="'background:'+randomColors()" @click="openTag(tag.id)" class="note-tag"
+                  v-for="tag in note.tags">
+                #&nbsp;{{tag.title}}
+            </span>
+        </div>
+        <div class="note-content" v-html="markdownText"></div>
+        <div class="note-footer" style="font-size:13px">
+            <div class="pay-container">
+                写的不错，打赏作者<br>
+                <img alt="" height="150" style="padding: 5px;background: #dedede;border-radius: 8px;"
+                     th:src="@{/img/404.png}" width="150"><br>
+                (支持微信、支付宝)
+            </div>
+        </div>
+        <div id="reply-container">
+
+        </div>
+        <div @click="isChange=!isChange" class="tree-list">
+            <div :class="{change:isChange}" class="tree-icon"></div>
+        </div>
+        <el-card :class="{hidelist:!isChange}" class="tree-node" v-html="tocHtml"></el-card>
+    </div>
+    <div th:replace="common/footer"></div>
+</div>
+<script src="https://cdn.bootcss.com/velocity/2.0.5/velocity.min.js"></script>
+<!--vue-->
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<!-- element-ui -->
+<script src="https://cdn.bootcss.com/element-ui/2.7.2/index.js"></script>
+<script th:src="@{/js/note.js}"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.6/highlight.min.js"></script>
+</body>
+<script th:inline="javascript">
+    let dataJson = [[${data}]];
+    vue.click = dataJson['click'];
+    vue.len = dataJson['len'];
+    vue.note = dataJson['note'];
+    console.log(dataJson)
+</script>
+<script>
+    let markdownIt = null;
+    let markdownItTocAndAnchor = null
+</script>
+<script th:src="@{/js/bundle.js}"></script>
+<script th:src="@{/js/particles.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+<script>
+    vue.markdownText = markdownIt({
+        highlight: (str, lang) => {
+            if (lang && hljs.getLanguage(lang)) {
+                try {
+                    return '<div class="code-pre">' + hljs.highlight(lang, str).value + '</div>'
+                } catch (__) {
+                }
+            }
+            return ''
+        }
+    }).use(markdownItTocAndAnchor, {
+        tocLastLevel: 3,
+        tocCallback: function (tocMarkdown, tocArray, tocHtml) {
+            vue.tocHtml = tocHtml
+        }
+    }).render(dataJson['note'].content);
+
+    vue.$nextTick(() => {
+        document.querySelectorAll('code .code-pre').forEach((e) => {
+            let lineArr = e.innerHTML.split('\n');
+            let result = '';
+            let len = lineArr.length;
+            for (let i = 0; i < len - 1; i++) {
+                result += '<li>' + lineArr[i] + '</li>'
+            }
+            e.innerHTML = '<ol class=\'line-numbers\'>' + result + '</ol>'
+        })
+    })
+
+</script>
+<script>
+    document.querySelector("#app").style.display = 'block';
+    document.querySelector("#animation").style.opacity = 0;
+    setTimeout(() => {
+        document.querySelector("#animation").style.display = 'none'
+    }, 500);
+    setTimeout(() => {
+        document.querySelector(".main-container").style.opacity = 1
+    }, 500)
+</script>
+<!--<script>-->
+<!--    new Valine({-->
+<!--        el: '#reply-container',-->
+<!--        appId: 'GyF9w7cCtdicxaKfHKJyjjC9-gzGzoHsz',-->
+<!--        appKey: 'mquBGDELW6u70BiizXk1HGnH',-->
+<!--        placeholder:'文明发言是交流的起点',-->
+<!--        notify:true,-->
+<!--        verify:true,-->
+<!--        path:'${note.id}',-->
+<!--        avatar:'mp',-->
+<!--        meta:['nick','mail'],-->
+<!--        recordIP:true-->
+<!--    })-->
+<!--</script>-->
+</html>

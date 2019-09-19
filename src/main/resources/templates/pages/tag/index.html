@@ -1,0 +1,53 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>标签 - Zero's Blog</title>
+    <link rel="stylesheet" th:href="@{/css/tags.css}">
+    <div th:replace="common/head"></div>
+</head>
+<body>
+<div id="animation">
+    <div class="spinner"></div>
+    <h2 style="text-align: center;color:#999">Loading...</h2>
+</div>
+<div id="app">
+    <!-- 导航栏 -->
+    <div th:replace="common/header"></div>
+    <!-- 至顶部 -->
+    <div :class="{hideTop:top}" @click="toTop" class="top">
+        <i class="el-icon-download" style="transform: rotate(180deg);"></i>
+    </div>
+    <div class="main-container" v-cloak>
+        <h2 style="color: #808080;">All Tags</h2>
+        <transition-group
+                :css="false"
+                @before-enter="beforeEnter"
+                @enter="enter"
+                @leave="leave">
+            <div :data-index="index" :key="tag.id" @click="openTag(tag.id)" class="tag" v-for="tag,index in tags">
+                <span v-text="tag.title"></span>
+                <span :style="{backgroundColor:randomColors()}" class="tag-icon"></span>
+            </div>
+        </transition-group>
+    </div>
+    <!-- 底部footer -->
+    <div th:replace="common/footer"></div>
+</div>
+<script th:inline="javascript">
+    let dataJson = [[${data}]];
+    console.log(dataJson)
+</script>
+<script src="https://cdn.bootcss.com/velocity/2.0.5/velocity.min.js"></script>
+<!--vue-->
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<!-- element-ui -->
+<script src="https://cdn.bootcss.com/element-ui/2.7.2/index.js"></script>
+<script th:src="@{/js/tags.js}"></script>
+</body>
+</html>
+<script>
+    document.querySelector("#app").style.display = 'block';
+    document.querySelector("#animation").style.opacity = 0;
+    setTimeout(() => {
+        document.querySelector("#animation").style.display = 'none'
+    }, 500)
+</script>

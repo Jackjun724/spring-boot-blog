@@ -1,0 +1,133 @@
+.main-container {
+    width: 900px;
+    margin: 40px auto;
+}
+
+.note-header {
+    height: 37px;
+    color: white;
+    background: black;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    line-height: 37px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    user-select: none;
+    display: inline-block;
+    padding: 0 20px;
+    max-width: 700px;
+}
+
+.note-info {
+    position: relative;
+    width: 900px;
+    margin: 60px auto;
+    text-align: center;
+    cursor: pointer;
+}
+
+.note-header-hr {
+    position: absolute;
+    width: 900px;
+    background: black;
+    height: 2px;
+    top: 39px;
+    left: 0;
+    z-index: 0;
+}
+
+.note-message {
+    font-size: 12px;
+    color: #b0b0b0;
+    margin: 10px 0;
+    user-select: none;
+}
+
+.note-message span {
+    margin: 0 4px;
+}
+
+.note-message .separator {
+    border-right: 1px solid #b0b0b0;
+}
+
+.note-summary {
+    text-indent: 20px;
+    text-align: left;
+    color: #666;
+    letter-spacing: 1px;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.note-footer {
+    margin: 10px 0;
+    width: 250px;
+    position: absolute;
+    right: 0;
+    height: 26px;
+    border-bottom: 2px solid black;
+    text-align: right;
+    user-select: none;
+}
+
+.note-footer .note-date {
+    width: 132px;
+    height: 26px;
+    background-color: black;
+    display: inline-block;
+    position: relative;
+    color: white;
+    font-size: 14px;
+    text-align: left;
+    white-space: nowrap;
+    line-height: 26px;
+    font-family: 'DotumChe', 'MS Gothic', serif;
+    letter-spacing: 1px;
+}
+
+.note-footer .note-date:before {
+    content: '';
+    position: absolute;
+    left: -26px;
+    top: 0;
+    border: 13px solid transparent;
+    border-right-color: black;
+    border-bottom-color: black;
+}
+
+.page {
+    width: 900px;
+    text-align: center;
+    margin: 0 auto 10px auto;
+}
+
+.topping {
+    position: relative;
+}
+
+.topping:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 5px solid transparent;
+    border-left-color: red;
+    border-top-color: red;
+}
+
+.note-info:before {
+    content: '';
+    position: absolute;
+    right: 12px;
+    top: 11px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 30px;
+    background-color: #f7f7f7;
+    box-shadow: inset 0 0 5px #0000001c;
+    z-index: 4;
+}

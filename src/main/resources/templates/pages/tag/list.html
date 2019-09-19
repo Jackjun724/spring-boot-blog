@@ -1,0 +1,71 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>关于标签 - Zero's Blog</title>
+    <link rel="stylesheet" th:href="@{/css/tags-list.css}">
+    <div th:replace="common/head"></div>
+    <style>
+        .icon {
+            width: 1em;
+            height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="animation">
+    <div class="spinner"></div>
+    <h2 style="text-align: center;color:#999">Loading...</h2>
+</div>
+<div id="app">
+    <!--导航栏-->
+    <div th:replace="common/header"></div>
+    <!-- 至顶部 -->
+    <div :class="{hideTop:top}" @click="toTop" class="top">
+        <i class="el-icon-download" style="transform: rotate(180deg);"></i>
+    </div>
+    <div class="main-container" v-cloak>
+        <h2 style="color: #808080;">关于 <span class="tag-name" v-text="parentTagName"></span> 的文章</h2>
+        <transition-group
+                :css="false"
+                @before-enter="beforeEnter"
+                @enter="enter"
+                @leave="leave"
+                style="text-align: center;display: block;">
+            <el-card :key="item.id" class="note" v-for="item in noteList">
+                <h2 @click="openNote(item.id)" v-text="item.title"></h2>
+                <span class="time" v-text="dateFormat(item.publish_time)"></span>
+                <div class="icon-container">
+                    <svg aria-hidden="true" class="icon">
+                        <use :xlink:href="'#icon-notebook'+randomIcon()"></use>
+                    </svg>
+                </div>
+            </el-card>
+        </transition-group>
+    </div>
+    <!-- 底部footer -->
+    <div th:replace="common/footer"></div>
+</div>
+<script th:inline="javascript">
+    let dataJson = [[${data}]];
+    console.log(dataJson)
+</script>
+
+<script src="https://cdn.bootcss.com/velocity/2.0.5/velocity.min.js"></script>
+<!--vue-->
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<!-- element-ui -->
+<script src="https://cdn.bootcss.com/element-ui/2.7.2/index.js"></script>
+<script th:src="@{/js/tags-list.js}"></script>
+<script th:src="@{/font/iconfont.js}"></script>
+
+</body>
+</html>
+<script>
+    document.querySelector("#app").style.display = 'block';
+    document.querySelector("#animation").style.opacity = 0;
+    setTimeout(() => {
+        document.querySelector("#animation").style.display = 'none'
+    }, 500)
+</script>

@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    background: #f7f7f7;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+
+#app {
+    height: 100%;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(255, 67, 91);
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(255, 29, 28);
+}
+
+::selection {
+    background-color: rgb(255, 41, 73);
+    color: white;
+}
+
+/* 分页样式 */
+.el-pager li {
+    background: transparent;
+}
+
+.el-pagination button:disabled {
+    background: transparent;
+}
+
+.el-pagination .btn-next, .el-pagination .btn-prev {
+    background: transparent;
+}
+
+.el-pager li.active {
+    color: rgb(255, 41, 73);
+}
+
+.el-pager li:hover {
+    color: rgb(255, 41, 73);
+}
+
+/* 加载样式 必须在JS 加载到页面之前加载 */
+#app{
+    display: none;
+}
+#animation{
+    transition: all 0.5s;
+    position: absolute;
+    left: 50%;
+    margin-left: -59px;
+    top:10%;
+}
+.spinner {
+    width: 60px;
+    height: 60px;
+    background-color: #ff2949;
+    margin: 100px auto;
+    -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+    animation: rotateplane 1.2s infinite ease-in-out;
+}
+@-webkit-keyframes rotateplane {
+    0% {
+        -webkit-transform: perspective(120px)
+    }
+    50% {
+        -webkit-transform: perspective(120px) rotateY(180deg)
+    }
+    100% {
+        -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+    }
+}
+
+@keyframes rotateplane {
+    0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+    }
+    50% {
+        transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+    }
+    100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+    }
+}

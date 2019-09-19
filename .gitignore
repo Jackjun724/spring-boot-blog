@@ -1,7 +1,5 @@
 HELP.md
 target/
-!.mvn/wrapper/maven-wrapper.jar
-.mvn/
 !**/src/main/**
 !**/src/test/**
 
@@ -30,3 +28,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### runtime log ###
+runtime.log
+*.gz
