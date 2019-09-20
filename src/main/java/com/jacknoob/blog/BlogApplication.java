@@ -1,11 +1,14 @@
 package com.jacknoob.blog;
 
+import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 import com.jacknoob.blog.common.Constants;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.core.env.Environment;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -17,10 +20,11 @@ import java.net.UnknownHostException;
  * Blog
  * @author JackJun
  */
-@SpringBootApplication
+// Fix unknown bug
+@SpringBootApplication(exclude = PageHelperAutoConfiguration.class)
 @EnableSwagger2
 @MapperScan("com.jacknoob.blog.mapper")
-public class BlogApplication {
+public class BlogApplication extends SpringBootServletInitializer {
 
     private static Logger logger = LoggerFactory.getLogger(BlogApplication.class);
 
@@ -40,4 +44,9 @@ public class BlogApplication {
                 env.getProperty("server.port"));
     }
 
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        builder.sources(this.getClass());
+        return super.configure(builder);
+    }
 }
