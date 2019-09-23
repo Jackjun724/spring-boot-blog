@@ -1,5 +1,6 @@
 package com.jacknoob.blog;
 
+import com.jacknoob.blog.common.Constants;
 import com.jacknoob.blog.entity.Login;
 import com.jacknoob.blog.mapper.LoginMapper;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -23,6 +24,8 @@ public class UserInit {
 
     @BeforeClass
     public static void setUpMybatisDatabase() {
+        //设置active的profile
+        System.setProperty(Constants.SPRING_PROFILE_KEY, "prod");
         SqlSessionFactory builder = new SqlSessionFactoryBuilder().build(UserInit.class.getClassLoader().getResourceAsStream("mybatisTestConfiguration/LoginMapperTestConfiguration.xml"));
         mapper = builder.getConfiguration().getMapper(LoginMapper.class, builder.openSession(true));
     }
