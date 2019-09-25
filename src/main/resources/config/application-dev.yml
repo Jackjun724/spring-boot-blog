@@ -37,4 +37,7 @@ security:
   # 一个月
   jwtExpirationInMs: 259200000
 
+swagger:
+  active: true
+
 

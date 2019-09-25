@@ -1,7 +1,13 @@
 package com.jacknoob.blog.config.swagger;
 
 import com.google.common.collect.Lists;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -21,6 +27,10 @@ import java.util.List;
  */
 @Configuration
 public class SwaggerConfig {
+
+    @Value("${swagger.active}")
+    private boolean isEnableSwagger=false;
+
     @Bean
     public Docket createRestApi(){
         ApiInfo apiInfo = new ApiInfoBuilder()
@@ -36,7 +46,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.jacknoob.blog.web"))
                 .paths(PathSelectors.regex("/api/.*"))
-                .build()
+                .build().enable(isEnableSwagger)
                 .securitySchemes(Lists.newArrayList(apiKey()))
                 .securityContexts(securityContexts());
     }

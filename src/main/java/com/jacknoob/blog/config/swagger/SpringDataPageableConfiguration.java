@@ -2,6 +2,7 @@ package com.jacknoob.blog.config.swagger;
 
 import com.fasterxml.classmate.TypeResolver;
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
@@ -23,6 +24,7 @@ import static springfox.documentation.schema.AlternateTypeRules.newRule;
 public class SpringDataPageableConfiguration {
 
     @Bean
+    @ConditionalOnExpression("${swagger.active}")
     public AlternateTypeRuleConvention pageableConvention(final TypeResolver resolver) {
         return new AlternateTypeRuleConvention() {
             @Override

@@ -38,3 +38,5 @@ security:
   jwtExpirationInMs: 259200000
 
 
+swagger:
+  active: false
