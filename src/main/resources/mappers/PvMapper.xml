@@ -56,8 +56,8 @@
         SELECT DATE_FORMAT(date, '%w') as weekd, sum(num) count
         FROM pv
         WHERE YEARWEEK(date_format(date, '%Y-%m-%d')) = YEARWEEK(now()) - 1
-        group by DATE_FORMAT(weekd, '%w')
-        order by DATE_FORMAT(weekd, '%w') asc
+        group by weekd
+        order by weekd
     </select>
 
     <select id="getDayVisitsNum" resultType="java.lang.Integer">
