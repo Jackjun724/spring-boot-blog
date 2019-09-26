@@ -42,6 +42,7 @@ public class BlogController {
     @ResponseBody
     public Page loadMore(@RequestParam("page") int page) {
         Page<Map<String, Object>> pageResult = new Page<>();
+        page = Math.max(page,2);
         pageResult.setPageSize(Constants.TIME_LINE_PAGE_SIZE);
         Map<String, Object> map = new HashMap<>(16);
         return ResponseUtils.assemblyPage(pageResult, blogService.loadMoreByPage(page, pageResult));
