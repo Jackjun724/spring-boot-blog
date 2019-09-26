@@ -53,11 +53,12 @@
     </update>
 
     <select id="getWeekVisits" resultType="java.util.Map">
-        SELECT DATE_FORMAT(date, '%w') as weekd, sum(num) count
-        FROM pv
-        WHERE YEARWEEK(date_format(date, '%Y-%m-%d')) = YEARWEEK(now()) - 1
-        group by DATE_FORMAT(weekd, '%w')
-        order by DATE_FORMAT(weekd, '%w') asc
+        select weekd,sum(count) count from (SELECT date,DATE_FORMAT(date, '%w') as weekd, num count
+                                            FROM pv) as t
+        WHERE YEARWEEK(date_format(t.date, '%Y-%m-%d')) = YEARWEEK(now()) - 1 AND weekd!=0
+           OR YEARWEEK(date_format(t.date, '%Y-%m-%d')) = YEARWEEK(now()) AND weekd=0
+        group by weekd
+        order by weekd
     </select>
 
     <select id="getDayVisitsNum" resultType="java.lang.Integer">

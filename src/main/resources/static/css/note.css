@@ -32,6 +32,7 @@
     border-radius: 30px;
     font-size: 13px;
     margin-top: 10px;
+    margin-right: 5px;
     display: inline-block;
     cursor: pointer;
     transition: all 0.3s;

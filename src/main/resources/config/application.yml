@@ -12,3 +12,6 @@ spring:
 mybatis:
   type-aliases-package: com.jacknoob.blog.entity
   mapper-locations: classpath*:mappers/*.xml
+
+swagger:
+  active: true

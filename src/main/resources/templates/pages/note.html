@@ -1,10 +1,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Jack's Blog</title>
+    <title th:text="${data.note.title+' - Zero Blog'}"></title>
     <div th:replace="common/head"></div>
     <link rel="stylesheet" th:href="@{/css/note.css}">
     <link rel="stylesheet" th:href="@{/css/solarized-dark.css}">
-
 </head>
 <body>
 <div id="animation">
@@ -12,7 +11,7 @@
     <h2 style="text-align: center;color:#999">Loading...</h2>
 </div>
 <script src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<!--<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>-->
+<script src='https://unpkg.com/valine/dist/Valine.min.js'></script>
 <div id="app" v-cloak>
     <!-- 导航栏 -->
     <div th:replace="common/header"></div>
@@ -41,7 +40,7 @@
             <div class="pay-container">
                 写的不错，打赏作者<br>
                 <img alt="" height="150" style="padding: 5px;background: #dedede;border-radius: 8px;"
-                     th:src="@{/img/404.png}" width="150"><br>
+                     th:src="@{/img/pay.png}" width="150"><br>
                 (支持微信、支付宝)
             </div>
         </div>
@@ -75,8 +74,6 @@
     let markdownItTocAndAnchor = null
 </script>
 <script th:src="@{/js/bundle.js}"></script>
-<script th:src="@{/js/particles.min.js}"></script>
-<script th:src="@{/js/app.js}"></script>
 <script>
     vue.markdownText = markdownIt({
         highlight: (str, lang) => {
@@ -118,18 +115,26 @@
         document.querySelector(".main-container").style.opacity = 1
     }, 500)
 </script>
-<!--<script>-->
-<!--    new Valine({-->
-<!--        el: '#reply-container',-->
-<!--        appId: 'GyF9w7cCtdicxaKfHKJyjjC9-gzGzoHsz',-->
-<!--        appKey: 'mquBGDELW6u70BiizXk1HGnH',-->
-<!--        placeholder:'文明发言是交流的起点',-->
-<!--        notify:true,-->
-<!--        verify:true,-->
-<!--        path:'${note.id}',-->
-<!--        avatar:'mp',-->
-<!--        meta:['nick','mail'],-->
-<!--        recordIP:true-->
-<!--    })-->
-<!--</script>-->
+<script>
+    new Valine({
+        el: '#reply-container',
+        appId: 'GyF9w7cCtdicxaKfHKJyjjC9-gzGzoHsz',
+        appKey: 'mquBGDELW6u70BiizXk1HGnH',
+        placeholder:'文明发言是交流的起点',
+        notify:true,
+        verify:true,
+        path:'${note.id}',
+        avatar:'mp',
+        meta:['nick','mail'],
+        recordIP:true
+    })
+</script>
+<script th:src="@{/js/particles.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
 </html>
+<style>
+    #reply-container .info{
+        display: none !important;
+    }
+</style>
+
