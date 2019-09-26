@@ -20,7 +20,8 @@ import java.net.UnknownHostException;
  * Blog
  * @author JackJun
  */
-@SpringBootApplication
+//Fix 线上奇怪BUG
+@SpringBootApplication(exclude = PageHelperAutoConfiguration.class)
 @EnableSwagger2
 @MapperScan("com.jacknoob.blog.mapper")
 public class BlogApplication extends SpringBootServletInitializer {
