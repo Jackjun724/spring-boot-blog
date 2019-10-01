@@ -1,6 +1,5 @@
 package com.jacknoob.blog;
 
-import com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration;
 import com.jacknoob.blog.common.Constants;
 import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
@@ -20,8 +19,7 @@ import java.net.UnknownHostException;
  * Blog
  * @author JackJun
  */
-//Fix 线上奇怪BUG
-@SpringBootApplication(exclude = PageHelperAutoConfiguration.class)
+@SpringBootApplication
 @EnableSwagger2
 @MapperScan("com.jacknoob.blog.mapper")
 public class BlogApplication extends SpringBootServletInitializer {
@@ -46,6 +44,9 @@ public class BlogApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        if (System.getProperty(Constants.SPRING_PROFILE_KEY) == null) {
+            System.setProperty(Constants.SPRING_PROFILE_KEY, "prod");
+        }
         builder.sources(this.getClass());
         return super.configure(builder);
     }
