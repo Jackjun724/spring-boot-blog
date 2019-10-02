@@ -95,39 +95,39 @@
     z-index: 999;
 }
 
-.markdownIt-TOC a {
+.doc-tree a {
     text-decoration: none;
     font-size: 13px;
     color: #666;
     transition: all 0.3s;
 }
 
-.markdownIt-TOC a:hover {
+.doc-tree a:hover {
     color: red;
 }
 
-.markdownIt-TOC li {
+.doc-tree li {
     list-style: none;
 }
 
-.markdownIt-TOC {
+.doc-tree {
     border-left: 1px solid #ff4a4d;
     text-align: left;
 }
 
-.markdownIt-TOC {
+.doc-tree {
     padding-inline-start: 15px;
 }
 
-.markdownIt-TOC ul {
+.doc-tree ul {
     padding-inline-start: 25px;
 }
 
-.markdownIt-TOC > li, .markdownIt-TOC > li > ul > li {
+.doc-tree > li, .doc-tree > li > ul > li {
     position: relative;
 }
 
-.markdownIt-TOC > li:before {
+.doc-tree > li:before {
     content: '';
     display: block;
     height: 9px;
@@ -140,7 +140,7 @@
     border: 3px solid #ffaeaf;
 }
 
-.markdownIt-TOC > li > ul > li:before {
+.doc-tree > li > ul > li:before {
     content: '';
     display: block;
     height: 5px;
@@ -208,12 +208,19 @@
 }
 
 /* Markdown样式 */
-.markdownIt-Anchor {
+.anchor {
     text-decoration: none;
     color: #f14c4c;
     font-weight: 900;
     font-size: 20px;
     user-select: none;
+}
+
+.link{
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid #ff1d1c;
 }
 
 p {
@@ -226,7 +233,7 @@ p code, li code {
     background: #f0f0f0;
     line-height: 1.6;
     border-radius: 5px;
-    padding: 5px;
+    padding: 5px 0;
     font-family: consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
     letter-spacing: 0;
 }

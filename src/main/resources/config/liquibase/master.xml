@@ -6,5 +6,6 @@
 
     <include file="classpath:config/liquibase/changelog/00000000000_init_database.xml" />
     <include file="classpath:config/liquibase/changelog/201909142348_file_mapping.xml"/>
+    <include file="classpath:config/liquibase/changelog/later_modify.xml"/>
 
 </databaseChangeLog>

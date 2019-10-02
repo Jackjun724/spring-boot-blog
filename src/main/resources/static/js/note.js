@@ -8,8 +8,7 @@ let vue = new Vue({
 
         /* 页面数据 */
         name: '文章',
-        markdownText: '',
-        tocHtml: '',
+        docTree: [],
         isChange: false,
         click: 0,
         len: 0,
@@ -37,11 +36,11 @@ let vue = new Vue({
         },
 
         /* 页面初始化效果 */
-        beforeEnter: function (el) {
+        beforeEnter(el) {
             el.style.opacity = 0;
             el.style.marginTop = '20px'
         },
-        enter: function (el, done) {
+        enter(el, done) {
             var delay = 250;
             setTimeout(function () {
                 Velocity(
@@ -51,7 +50,7 @@ let vue = new Vue({
                 )
             }, delay)
         },
-        leave: function (el, done) {
+        leave(el, done) {
             var delay = 250;
             setTimeout(function () {
                 Velocity(
@@ -61,32 +60,35 @@ let vue = new Vue({
                 )
             }, delay)
         },
-        randomIcon: function () {
+        randomIcon() {
             let random = ['1', '2', ''];
             return random[parseInt(Math.random() * 3)]
         },
-        openNote: function (id, time) {
+        openNote(id, time) {
             window.location = `/note/${id}/${time}`
         },
-        dateFormat: function (nS) {
-            return nS
+        dateFormat(nS) {
+            if (nS) {
+                let str = nS.toString();
+                return str.substring(2, str.length - 3)
+            }
+            return ''
         },
-        lenFormat: function () {
+        lenFormat() {
             //保留一位小数
             return parseFloat(Math.ceil(this.len / 100) / 10) + 'k';
         },
-        randomColors: function () {
-            let colors = ['red', '#3181ff', '#ff2949', '#ffba16', '#5d5dff', '#24c5ff'];
-            let count = Math.round(Math.random() * (colors.length - 1));
-            return colors[count]
-        },
         openTag: function (id) {
             window.location = `/tags/${id}`
-        }
+        },
+        calcColors(id) {
+            let colors = ['red', '#3181ff', '#ff2949', '#ffba16', '#5d5dff', '#24c5ff'];
+            return colors[id%6]
+        },
     }
     ,
     mounted() {
         //向下翻隐藏导航
         window.addEventListener("scroll", this.scrollChange)
-    }
+    },
 });

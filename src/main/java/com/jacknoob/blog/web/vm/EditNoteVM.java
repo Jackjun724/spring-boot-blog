@@ -35,6 +35,8 @@ public class EditNoteVM {
     @NotNull(message = "摘要内容不能为空!")
     private String displayContent;
 
+    private String html;
+
     private List<String> tags;
 
     public Integer getId() {
@@ -99,5 +101,13 @@ public class EditNoteVM {
 
     public void setTags(List<String> tags) {
         this.tags = tags;
+    }
+
+    public String getHtml() {
+        return html;
+    }
+
+    public void setHtml(String html) {
+        this.html = html;
     }
 }

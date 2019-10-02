@@ -18,6 +18,8 @@ public class Note {
 
     private String displayContent;
 
+    private String html;
+
     private List<Tag> tags;
 
     public Note(Integer id, String title, Date publishTime, Date lastUpdateTime, String content, Integer displayType) {
@@ -29,6 +31,14 @@ public class Note {
         this.displayType = displayType;
     }
 
+    public Note(Integer id, String title, Date publishTime, Date lastUpdateTime, Integer displayType) {
+        this.id = id;
+        this.title = title;
+        this.publishTime = publishTime;
+        this.lastUpdateTime = lastUpdateTime;
+        this.displayType = displayType;
+    }
+
     public Note(Integer id, String title, Date publishTime, Date lastUpdateTime, String content, Integer displayType, String displayContent) {
         this.id = id;
         this.title = title;
@@ -37,6 +47,17 @@ public class Note {
         this.content = content;
         this.displayType = displayType;
         this.displayContent = displayContent;
+    }
+
+    public Note(Integer id, String title, Date publishTime, Date lastUpdateTime, String content, Integer displayType, String displayContent,String html) {
+        this.id = id;
+        this.title = title;
+        this.publishTime = publishTime;
+        this.lastUpdateTime = lastUpdateTime;
+        this.content = content;
+        this.displayType = displayType;
+        this.displayContent = displayContent;
+        this.html = html;
     }
 
     public Note() {
@@ -105,5 +126,13 @@ public class Note {
 
     public void setTags(List<Tag> tags) {
         this.tags = tags;
+    }
+
+    public String getHtml() {
+        return html;
+    }
+
+    public void setHtml(String html) {
+        this.html = html;
     }
 }

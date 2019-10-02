@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql ,mariadb"/>
+    <property name="doubleType" value="float8" dbms="postgresql, h2"/>
+    <property name="doubleType" value="double" dbms="mysql, oracle, mssql ,mariadb"/>
+    <property name="textType" value="varchar" dbms="postgresql, h2"/>
+    <property name="textType" value="text" dbms="mysql, oracle, mssql , mariadb"/>
+
+    <changeSet id="20191002135020" author="jack">
+        <addColumn tableName="note">
+            <column name="html" type="${textType}" remarks="转换后的markdown文本"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

@@ -95,7 +95,8 @@ public class NoteService {
                 , vm.getLastUpdateTime() == null ? new Date(System.currentTimeMillis()) : vm.getLastUpdateTime()
                 , vm.getContent()
                 , vm.getDisplayType()
-                , vm.getDisplayContent());
+                , vm.getDisplayContent()
+                , vm.getHtml());
     }
 
     @NotNull
