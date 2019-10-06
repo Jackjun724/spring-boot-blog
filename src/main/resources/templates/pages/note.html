@@ -92,16 +92,16 @@
                 result += '<li>' + lineArr[i] + '</li>'
             }
             e.innerHTML = '<ol class=\'line-numbers\'>' + result + '</ol>'
-        })
+        });
         //DOC TREE
-        let tree = []
+        let tree = [];
         document.querySelectorAll('.heading').forEach(e => {
-            let tag = e.tagName
+            let tag = e.tagName;
             let _tree = {
                 title: e.innerText.substring(1),
                 anchor: e.getAttribute("id"),
                 child: []
-            }
+            };
             if (tag === 'H1' || tree.length == 0) {
                 tree.push(_tree)
             } else if (tag === 'H2' || (tag === 'H3' && tree[tree.length - 1].child.length == 0)) {
@@ -109,14 +109,14 @@
             } else {
                 tree[tree.length - 1].child[tree[tree.length - 1].child.length - 1].child.push(_tree)
             }
-        })
+        });
         vue.docTree = tree
     })
 </script>
 <script>
     //资源加载完毕 关闭加载动画效果
-    document.querySelector("#app").style.display = 'block'
-    const animation = document.querySelector("#animation")
+    document.querySelector("#app").style.display = 'block';
+    const animation = document.querySelector("#animation");
     animation.style.opacity = 0;
     setTimeout(() => {
         animation.style.display = 'none'
@@ -133,7 +133,7 @@
         placeholder: '文明发言是交流的起点',
         notify: true,
         verify: true,
-        path: '${note.id}',
+        path: vue.note.id,
         avatar: 'mp',
         meta: ['nick', 'mail'],
         recordIP: true

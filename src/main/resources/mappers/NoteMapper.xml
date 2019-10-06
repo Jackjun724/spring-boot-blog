@@ -213,4 +213,7 @@
         )))
         ) as t
     </select>
+    <select id="getTitleById" resultType="java.lang.String">
+        select note.title from note where id = #{id,jdbcType=INTEGER}
+    </select>
 </mapper>

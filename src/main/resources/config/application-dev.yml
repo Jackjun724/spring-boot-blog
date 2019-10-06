@@ -23,6 +23,20 @@ spring:
     lettuce.pool.max-wait: -1
     lettuce.pool.max-idle: 8
     lettuce.pool.min-idle: 0
+  mail:
+    host: smtp.mxhichina.com
+    port: 25
+    username: notify@retzero.com
+    password: Abc123456
+    protocol: smtp
+    defaultEncoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+        starttls:
+          enable: true
+          required: true
 
 logging:
   file: runtime.log
@@ -40,4 +54,8 @@ security:
 swagger:
   active: true
 
+lean-cloud:
+  app-id: GyF9w7cCtdicxaKfHKJyjjC9-gzGzoHsz
+  app-key: mquBGDELW6u70BiizXk1HGnH
+  to-mail: jack@retzero.com
 

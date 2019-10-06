@@ -7,8 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.net.InetAddress;
@@ -22,6 +24,8 @@ import java.net.UnknownHostException;
 @SpringBootApplication
 @EnableSwagger2
 @MapperScan("com.jacknoob.blog.mapper")
+@EnableConfigurationProperties
+@EnableScheduling
 public class BlogApplication extends SpringBootServletInitializer {
 
     private static Logger logger = LoggerFactory.getLogger(BlogApplication.class);

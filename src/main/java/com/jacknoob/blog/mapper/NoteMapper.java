@@ -46,4 +46,6 @@ public interface NoteMapper {
     int count();
 
     int countBy(@Param("tagsFilter") List<String> tagsFilter);
+
+    String getTitleById(@Param("id") Integer id);
 }
