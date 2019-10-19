@@ -69,4 +69,10 @@ public class SystemParamResource {
 
         return ResponseEntity.ok(RestResponse.getResp("获取成功！", "alipays://platformapi/startapp?appId=20000067&url="+URLEncoder.encode("https://yun.yishouyun.cn"+url,"UTF-8")));
     }
+
+    @RequestMapping("/get-goods")
+    @Timed
+    public ResponseEntity getGoodsList() throws URISyntaxException {
+        return ResponseEntity.ok(restTemplate.getForEntity(new URI("https://yun.yishouyun.cn/wechat/goods/get_good_list?dev_no=866262041626622"),Map.class).getBody());
+    }
 }
