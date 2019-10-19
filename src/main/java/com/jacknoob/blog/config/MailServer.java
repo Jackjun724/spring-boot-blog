@@ -20,8 +20,12 @@ import javax.mail.internet.MimeMessage;
 public class MailServer {
     private final LeanCloud leanCloud;
     private final JavaMailSender mailSender;
+
+    /**
+     * 邮件发送者
+     */
     @Value("${spring.mail.username}")
-    private String MAIL_SENDER; //邮件发送者
+    private String MAIL_SENDER;
 
     public MailServer(JavaMailSender mailSender, LeanCloud leanCloud) {
         this.leanCloud = leanCloud;

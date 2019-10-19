@@ -60,7 +60,12 @@ public class FileService {
         String fileExtensionName = fileName.substring(fileName.lastIndexOf("."));
         String uuid = UUID.randomUUID().toString().replace("-", "");
         fileName = uuid + fileExtensionName;
-        String path = Constants.GLOBAL_UPLOAD_PATH;
+        String path;
+        if(System.getProperty("os").contains("Windows")){
+            path = Constants.GLOBAL_UPLOAD_PATH;
+        }else{
+            path = Constants.GLOBAL_OTHER_UPLOAD_PATH;
+        }
         logger.info("Upload File [{}] to [{}].", fileName, path);
 
         java.io.File fireDir = new java.io.File(path, fileName);

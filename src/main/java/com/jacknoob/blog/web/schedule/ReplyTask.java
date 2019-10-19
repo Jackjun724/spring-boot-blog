@@ -88,4 +88,8 @@ public class ReplyTask {
         }
         return new ArrayList<>();
     }
+
+    public HttpEntity getRequestEntity() {
+        return requestEntity;
+    }
 }

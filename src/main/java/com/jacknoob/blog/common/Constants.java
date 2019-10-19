@@ -13,6 +13,7 @@ public class Constants {
     public static final String SPRING_PROFILE_SWAGGER = "swagger";
 
     public static final String GLOBAL_UPLOAD_PATH = "F:\\UploadFile";
+    public static final String GLOBAL_OTHER_UPLOAD_PATH = "/usr/data/upload";
 
     public static final String SPRING_PROFILE_DEVELOPMENT = "dev";
 

@@ -17,8 +17,11 @@ import javax.inject.Inject;
 @RestController
 @RequestMapping("/api/manage")
 public class ManagerResource {
-    @Inject
-    private ManageService manageService;
+    private final ManageService manageService;
+
+    public ManagerResource(ManageService manageService) {
+        this.manageService = manageService;
+    }
 
     @GetMapping
     @ApiParam("仪表盘")

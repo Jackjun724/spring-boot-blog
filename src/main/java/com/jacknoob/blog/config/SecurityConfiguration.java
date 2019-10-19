@@ -4,6 +4,8 @@ import com.jacknoob.blog.security.JwtAuthenticationEntryPoint;
 import com.jacknoob.blog.security.JwtAuthenticationFilter;
 import com.jacknoob.blog.security.UserDetailsServiceImpl;
 import com.jacknoob.blog.web.interceptor.CORSSecurityFilter;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
+import org.springframework.boot.actuate.context.ShutdownEndpoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -80,8 +82,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/swagger-ui.html").permitAll()
                 .antMatchers("/api/loadTimeline").permitAll()
                 .antMatchers("/api/file/download").permitAll()
-                .antMatchers("/api/**")
-                .authenticated();
+                .antMatchers("/actuator/**").authenticated();
+//                .antMatchers("/api/**")
+//                .authenticated();
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         http.addFilterBefore(corsSecurityFilter, JwtAuthenticationFilter.class);

@@ -7,6 +7,7 @@ import com.jacknoob.blog.web.response.Page;
 import com.jacknoob.blog.web.util.ResponseUtils;
 import com.jacknoob.blog.web.vm.NoteVM;
 import com.jacknoob.blog.web.vm.TagNoteVM;
+import io.micrometer.core.annotation.Timed;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,10 +27,14 @@ import java.util.Map;
  */
 @Controller
 public class BlogController {
-    @Inject
-    private BlogService blogService;
+    private final BlogService blogService;
+
+    public BlogController(BlogService blogService) {
+        this.blogService = blogService;
+    }
 
     @GetMapping(value = {"/index", "/", "/index/{page}"})
+    @Timed
     public String homePage(Map<String, Object> map, @PathVariable(required = false) Integer page) {
         blogService.pv();
         Page<Map<String, Object>> pageVM = new Page<>();

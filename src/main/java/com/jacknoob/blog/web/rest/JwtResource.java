@@ -24,14 +24,17 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/api")
 public class JwtResource {
-    @Inject
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
-    @Inject
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
-    @Inject
-    private RedisTemplate<String,String> redisTemplate;
+    private final RedisTemplate<String,String> redisTemplate;
+
+    public JwtResource(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, RedisTemplate<String, String> redisTemplate) {
+        this.authenticationManager = authenticationManager;
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.redisTemplate = redisTemplate;
+    }
 
     @PostMapping("/auth")
     @ApiOperation("登录")
