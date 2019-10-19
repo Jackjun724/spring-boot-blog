@@ -38,7 +38,7 @@ public class SystemParamResource {
     @Timed
     @ApiOperation("模拟Http接口测试工具")
     @SuppressWarnings("all")
-    public ResponseEntity requestUrl(@RequestParam Integer row,@RequestParam Integer col) throws URISyntaxException, UnsupportedEncodingException {
+    public ResponseEntity requestUrl(@RequestParam Integer id,@RequestParam Double price) throws URISyntaxException, UnsupportedEncodingException {
         //构造请求头
         HttpHeaders headers = new HttpHeaders();
         headers.set(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
@@ -49,13 +49,13 @@ public class SystemParamResource {
         map.add("cart_list[0][cid]","115673");
         map.add("cart_list[0][dev_no]","866262041626622");
         map.add("cart_list[0][sev_no]","A");
-        map.add("cart_list[0][row]",row.toString());
-        map.add("cart_list[0][col]",col.toString());
-        map.add("cart_list[0][goods_id]","36236");
+        map.add("cart_list[0][row]","3");
+        map.add("cart_list[0][col]","3");
+        map.add("cart_list[0][goods_id]",id.toString());
         map.add("cart_list[0][cat_id]","0");
         map.add("cart_list[0][pic_url]","https://yun.yishouyun.cn/Uploads/Images/2019/09/02/20190902215758_6351.jpeg");
         map.add("cart_list[0][is_active]","0");
-        map.add("cart_list[0][price]","2.00");
+        map.add("cart_list[0][price]",price.toString());
         map.add("cart_list[0][goods_name]","农夫山泉");
         map.add("cart_list[0][stock]","5");
         map.add("cart_list[0][qty]","1");
