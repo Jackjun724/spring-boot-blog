@@ -32,7 +32,7 @@ spring:
     lettuce.pool.min-idle: 0
   mail:
     host: smtp.mxhichina.com
-    port: 465
+    port: 587
     username: notify@retzero.com
     password: Abc123456
     protocol: smtp
