@@ -36,7 +36,7 @@
                         <!--<span class="separator"></span>-->
                         <!--<span>访问量 < 1k</span>-->
                     </div>
-                    <div class="note-summary" v-text="item.display_content"></div>
+                    <div class="note-summary" v-text="item.display_content?item.display_content : '暂无介绍'"></div>
                     <div class="note-footer">
                         <div class="note-date" v-text="dateFormat(item.publish_time)"></div>
                     </div>

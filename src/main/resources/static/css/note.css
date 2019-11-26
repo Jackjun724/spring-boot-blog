@@ -75,6 +75,8 @@
     bottom: 75px;
     right: 70px;
     transition: all .3s cubic-bezier(0, 1.26, 0.24, 1.44);
+    max-height: 60%;
+    overflow-y: auto;
 }
 
 .tree-list {

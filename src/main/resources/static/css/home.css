@@ -3,6 +3,10 @@
     margin: 40px auto;
 }
 
+.note-info:hover .note-summary {
+    height: 50px;
+}
+
 .note-header {
     height: 37px;
     color: white;
@@ -60,6 +64,9 @@
     letter-spacing: 1px;
     font-size: 14px;
     line-height: 22px;
+    overflow: hidden;
+    height: 0;
+    transition: all 0.5s;
 }
 
 .note-footer {
