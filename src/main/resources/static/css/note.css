@@ -379,3 +379,44 @@ blockquote {
 ul {
     padding-inline-start: 30px;
 }
+
+/*
+ Updated: 20/02/04 15:22 Added Markdown Table Style
+ */
+
+table{
+    border-collapse: collapse;
+    cursor: default !important;
+    width: 100%;
+}
+
+table thead {
+    border-bottom: 1px solid #e8e8e8;
+    background: rgb(250, 250, 250);
+}
+thead th {
+    padding: 16px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    list-style: none;
+    font-feature-settings: 'tnum';
+    text-align:left;
+}
+tbody tr {
+    border-bottom: 1px solid #e8e8e8;
+    transition: all 0.3s;
+}
+tbody tr:hover {
+    background: rgb(230, 247, 255);
+}
+tbody td {
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    list-style: none;
+    font-feature-settings: 'tnum';
+    padding: 16px
+}
